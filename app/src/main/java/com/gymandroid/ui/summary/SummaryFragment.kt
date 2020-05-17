@@ -22,10 +22,6 @@ class SummaryFragment : Fragment() {
         summaryViewModel =
                 ViewModelProviders.of(this).get(SummaryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_summary, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        summaryViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 }

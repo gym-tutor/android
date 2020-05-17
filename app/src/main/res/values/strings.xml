@@ -2,4 +2,7 @@
     <string name="app_name">Gym Android</string>
     <string name="title_summary">Summary</string>
     <string name="title_exercise">Exercise</string>
+    <string name="summary_card_title">Report</string>
+    <string name="summary_card_secondary_text">You exercised 4.8 hours last week</string>
+    <string name="summary_card_supporting_text">2.3 hours were spent on sit-ups, 1.9 hours were spent on push-ups, and 0.6 hours were spent on jogging.</string>
 </resources>
