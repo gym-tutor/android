@@ -1,6 +1,6 @@
 package com.gymandroid.ui.summary
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,19 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gymandroid.MainActivity
 import com.gymandroid.R
-import kotlinx.android.synthetic.main.fragment_summary.*
-import kotlinx.android.synthetic.main.fragment_summary.view.*
-import kotlinx.android.synthetic.main.fragment_summary.view.summary_record_list
+import com.gymandroid.SummaryDetailsActivity
 
 class Record(val type: String, val subtitle: String, val description: String)
 
-class RecordCardAdapter(val items: List<Record>) :
+class RecordCardAdapter(val items: List<Record>, val gotoDetails: () -> Unit) :
     RecyclerView.Adapter<RecordCardAdapter.RecordHolder>() {
 
     class RecordHolder(val layout: LinearLayout) : RecyclerView.ViewHolder(layout)
@@ -41,7 +41,18 @@ class RecordCardAdapter(val items: List<Record>) :
             items[position].subtitle
         holder.layout.findViewById<TextView>(R.id.summary_record_details).text =
             items[position].description
+        holder.layout.setOnClickListener { view ->
+            Log.d("clickasdfdgsh", "clicked")
+            makeText(
+                view.context,
+                view.findViewById<TextView>(R.id.summary_record_title).text.toString(),
+                Toast.LENGTH_LONG
+            ).show()
+
+            gotoDetails()
+        }
     }
+
 
 }
 
@@ -72,12 +83,17 @@ class SummaryFragment : Fragment() {
             Record("Jogging", "3 days ago", "0.6 hours, 22% correct rate")
         )
         val summaryRecordManager = LinearLayoutManager(activity)
-        val summaryRecordAdapter = RecordCardAdapter(records)
+        val summaryRecordAdapter = RecordCardAdapter(records, gotoDetailsPage)
         val summaryRecordList: RecyclerView = root.findViewById(R.id.summary_record_list)
         summaryRecordList.apply {
             layoutManager = summaryRecordManager
             adapter = summaryRecordAdapter
         }
         return root
+    }
+
+    val gotoDetailsPage: () -> Unit = {
+        Log.d("gotoDetailsPage", "entered")
+        startActivity(Intent(activity, SummaryDetailsActivity::class.java))
     }
 }

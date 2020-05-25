@@ -6,6 +6,7 @@ import android.os.PersistableBundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -20,5 +21,8 @@ class SummaryDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary_details)
+        findViewById<Button>(R.id.summary_details_done).setOnClickListener {
+            finish()
+        }
     }
 }
