@@ -41,14 +41,7 @@ class RecordCardAdapter(val items: List<Record>, val gotoDetails: () -> Unit) :
             items[position].subtitle
         holder.layout.findViewById<TextView>(R.id.summary_record_details).text =
             items[position].description
-        holder.layout.setOnClickListener { view ->
-            Log.d("clickasdfdgsh", "clicked")
-            makeText(
-                view.context,
-                view.findViewById<TextView>(R.id.summary_record_title).text.toString(),
-                Toast.LENGTH_LONG
-            ).show()
-
+        holder.layout.setOnClickListener {
             gotoDetails()
         }
     }
@@ -95,5 +88,6 @@ class SummaryFragment : Fragment() {
     val gotoDetailsPage: () -> Unit = {
         Log.d("gotoDetailsPage", "entered")
         startActivity(Intent(activity, SummaryDetailsActivity::class.java))
+        activity?.overridePendingTransition(R.anim.enter_new_from_right, R.anim.enter_old_from_right)
     }
 }

@@ -16,13 +16,15 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gymandroid.ui.summary.RecordCardAdapter
+import kotlinx.android.synthetic.main.activity_summary_details.*
 
 class SummaryDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary_details)
-        findViewById<Button>(R.id.summary_details_done).setOnClickListener {
+        summary_detail_bar.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
         }
     }
 }
