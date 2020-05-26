@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/settings_bar"
@@ -15,5 +17,88 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="Settings" />
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="top"
+        android:background="#999997"
+        android:text="Switch" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textSize="19dp"
+            android:text="Height" />
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:ems="9"
+            android:layout_weight="8"
+            android:inputType="number" />
+        <TextView android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="19dp"
+            android:text="cm"/>
+        <TextView android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textSize="19dp"
+            android:text="Weight" />
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:ems="9"
+            android:layout_weight="8"
+            android:inputType="number" />
+        <TextView android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="19dp"
+            android:text="kg"/>
+        <TextView android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textSize="19dp"
+            android:text="BMI" />
+        <TextView android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="19dp"
+            android:text="@android"/>
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
