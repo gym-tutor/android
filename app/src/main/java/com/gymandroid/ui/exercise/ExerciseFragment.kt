@@ -13,31 +13,22 @@ import com.gymandroid.R
 
 class ExerciseFragment : Fragment() {
 
-//    private lateinit var exerciseViewModel: ExerciseViewModel
-//
-//    override fun onCreateView(
-//            inflater: LayoutInflater,
-//            container: ViewGroup?,
-//            savedInstanceState: Bundle?
-//    ): View? {
-//        exerciseViewModel =
-//                ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
-//        val root = inflater.inflate(R.layout.fragment_exercise, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_dashboard)
-//        exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-//        return root
-//    }
+    private lateinit var exerciseViewModel: ExerciseViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
+        exerciseViewModel =
+                ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_exercise, container, false)
-        startActivity(Intent(activity, excerciseListActivity::class.java))
+        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
+            textView.text = it
+        })
         return root
     }
+
 
 }
