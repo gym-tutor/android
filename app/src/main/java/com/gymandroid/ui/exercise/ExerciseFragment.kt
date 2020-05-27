@@ -1,5 +1,6 @@
 package com.gymandroid.ui.exercise
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,20 +13,31 @@ import com.gymandroid.R
 
 class ExerciseFragment : Fragment() {
 
-    private lateinit var exerciseViewModel: ExerciseViewModel
+//    private lateinit var exerciseViewModel: ExerciseViewModel
+//
+//    override fun onCreateView(
+//            inflater: LayoutInflater,
+//            container: ViewGroup?,
+//            savedInstanceState: Bundle?
+//    ): View? {
+//        exerciseViewModel =
+//                ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
+//        val root = inflater.inflate(R.layout.fragment_exercise, container, false)
+//        val textView: TextView = root.findViewById(R.id.text_dashboard)
+//        exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
+//        return root
+//    }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        exerciseViewModel =
-                ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_exercise, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        startActivity(Intent(activity, excerciseListActivity::class.java))
         return root
     }
+
 }

@@ -10,6 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.exercise.excerciseListActivity"
+            android:label="@string/title_excercise_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.exercise.excerciseDetailActivity"
+            android:label="@string/title_excercise_detail"
+            android:parentActivityName=".ui.exercise.excerciseListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gymandroid.ui.exercise.excerciseListActivity" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>

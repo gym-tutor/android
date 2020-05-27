@@ -17,6 +17,6 @@ class SettingsActivity : AppCompatActivity() {
             finish()
             overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
         }
-        val EditText: weight = findViewById(R.id.weight)
+        // val EditText: weight = findViewById(R.id.weight)
     }
 }
