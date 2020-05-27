@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 
-@SuppressLint("Registered")
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +18,7 @@ class SettingsActivity : AppCompatActivity() {
             finish()
             overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
         }
+<<<<<<< HEAD
         val bmi: Button = findViewById(R.id.calculate_bmi) as Button
         bmi.setOnClickListener{
             val height: EditText = findViewById(R.id.height) as EditText
@@ -32,6 +32,10 @@ class SettingsActivity : AppCompatActivity() {
         val changecolor: Switch = findViewById(R.id.change_theme) as Switch
 
 
+=======
+
+        // val EditText: weight = findViewById(R.id.weight)
+>>>>>>> 3e14cd97516f5e48833386a185422ba6e23b479d
 
     }
 }

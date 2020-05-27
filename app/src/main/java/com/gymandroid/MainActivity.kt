@@ -2,11 +2,15 @@ package com.gymandroid
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
 
 class MainActivity : AppCompatActivity() {
     private var test = false
@@ -30,4 +34,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun startExercise(view: View) {
+        Toast.makeText(this@MainActivity, "Starting Exercise !", Toast.LENGTH_SHORT).show();
+        startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
+    }
+
 }
