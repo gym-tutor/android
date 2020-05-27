@@ -6,29 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.gymandroid.R
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_exercise.*
+
 
 class ExerciseFragment : Fragment() {
-
-    private lateinit var exerciseViewModel: ExerciseViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        exerciseViewModel =
-                ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_exercise, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
-
 
 }
