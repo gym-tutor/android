@@ -18,12 +18,12 @@
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="Settings" />
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/change_theme"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="top"
-        android:background="#999997"
-        android:text="Switch" />
+        android:gravity="center_vertical"
+        android:textSize="19dp"
+        android:text="Change color theme" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
         android:orientation="horizontal">
         <TextView
@@ -92,12 +92,23 @@
             android:textSize="19dp"
             android:text="BMI" />
         <TextView android:layout_width="0dp"
-            android:layout_weight="2"
+            android:id="@+id/bmi"
+            android:layout_weight="8"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:textSize="19dp"
-            android:text="@android"/>
+            android:text=""/>
             />
+
+        <Button
+            android:id="@+id/calculate_bmi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:background="#34D6FA"
+            android:gravity="center_vertical"
+            android:text="" />
+        />
     </LinearLayout>
 
 
