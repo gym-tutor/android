@@ -18,7 +18,6 @@ class SettingsActivity : AppCompatActivity() {
             finish()
             overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
         }
-<<<<<<< HEAD
         val bmi: Button = findViewById(R.id.calculate_bmi) as Button
         bmi.setOnClickListener{
             val height: EditText = findViewById(R.id.height) as EditText
@@ -29,13 +28,5 @@ class SettingsActivity : AppCompatActivity() {
             val bmi_output: TextView = findViewById(R.id.bmi) as TextView
             bmi_output.text ="%.2f".format(bmivalue)
         }
-        val changecolor: Switch = findViewById(R.id.change_theme) as Switch
-
-
-=======
-
-        // val EditText: weight = findViewById(R.id.weight)
->>>>>>> 3e14cd97516f5e48833386a185422ba6e23b479d
-
     }
 }
