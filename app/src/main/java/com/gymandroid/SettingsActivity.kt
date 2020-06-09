@@ -1,13 +1,13 @@
 package com.gymandroid
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CompoundButton
 import android.widget.EditText
-import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_setting.*
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -17,6 +17,15 @@ class SettingsActivity : AppCompatActivity() {
         settings_bar.setOnClickListener {
             finish()
             overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
+        }
+        val colortheme: CompoundButton = findViewById(R.id.change_theme) as CompoundButton
+        colortheme.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked){
+                setTheme(android.R.style.Theme_Black);
+            } else {
+                setTheme(android.R.style.Theme_Light);
+            }
+
         }
         val bmi: Button = findViewById(R.id.calculate_bmi) as Button
         bmi.setOnClickListener{

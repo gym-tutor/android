@@ -99,16 +99,19 @@
             android:textSize="19dp"
             android:text=""/>
             />
-
         <Button
             android:id="@+id/calculate_bmi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:background="#34D6FA"
-            android:gravity="center_vertical"
-            android:text="" />
+            android:gravity="center"
+            android:text="Calculate" />
         />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 
