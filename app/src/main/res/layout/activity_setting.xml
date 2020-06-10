@@ -5,8 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="?attr/backgroundcolor">
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/settings_bar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -23,6 +23,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:textSize="19dp"
+        android:textColor="?attr/textcolor"
         android:text="Change color theme" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
         android:orientation="horizontal">
@@ -30,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
+            android:textColor="?attr/textcolor"
             android:gravity="center_vertical"
             android:textSize="19dp"
             android:text="Height" />
@@ -43,6 +45,7 @@
         <TextView android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
+            android:textColor="?attr/textcolor"
             android:gravity="center_vertical"
             android:textSize="19dp"
             android:text="cm"/>
@@ -60,6 +63,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center_vertical"
+            android:textColor="?attr/textcolor"
             android:textSize="19dp"
             android:text="Weight" />
         <EditText
@@ -72,6 +76,7 @@
         <TextView android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
+            android:textColor="?attr/textcolor"
             android:gravity="center_vertical"
             android:textSize="19dp"
             android:text="kg"/>
@@ -87,6 +92,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:textColor="?attr/textcolor"
             android:layout_weight="3"
             android:gravity="center_vertical"
             android:textSize="19dp"
