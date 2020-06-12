@@ -30,6 +30,17 @@
         app:layout_constraintTop_toBottomOf="@id/textView3"
         app:layout_constraintVertical_bias="0.4" />
 
+    <Button
+        android:id="@+id/start_exercising"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startExercisingPage"
+        android:text="Exercising Page"
+        app:layout_constraintTop_toBottomOf="@id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="1" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"

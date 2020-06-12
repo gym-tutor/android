@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_exercise.*
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
+import com.gymandroid.ui.exercise.ExercisingActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,6 +60,11 @@ class MainActivity : AppCompatActivity() {
     fun startExercise(view: View) {
         Toast.makeText(this@MainActivity, "Starting Exercise !", Toast.LENGTH_SHORT).show();
         startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
+    }
+
+    fun startExercisingPage(view: View) {
+        Toast.makeText(this@MainActivity, "Exercising Page !", Toast.LENGTH_SHORT).show();
+        startActivity(Intent(this@MainActivity, ExercisingActivity::class.java))
     }
 
 

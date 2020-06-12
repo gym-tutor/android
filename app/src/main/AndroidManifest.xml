@@ -12,7 +12,8 @@
         <activity
             android:name=".ui.exercise.excerciseListActivity"
             android:label="@string/title_excercise_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.exercise.ExercisingActivity" />
         <activity
             android:name=".ui.exercise.excerciseDetailActivity"
             android:label="@string/title_excercise_detail"
