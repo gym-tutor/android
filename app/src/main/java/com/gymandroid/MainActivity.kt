@@ -85,7 +85,6 @@ class MainActivity : AppCompatActivity() {
             val y = event.values[1]
             val z = event.values[2]
 
-            //is_pos.setText("hello").toString()
         }
     }
 }
