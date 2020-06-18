@@ -9,6 +9,20 @@
         android:id="@+id/exercising_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/exercising_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

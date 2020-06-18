@@ -92,13 +92,10 @@ class MainActivity : AppCompatActivity() {
             val z = event.values[2]
 
 //            is_pos.setText("hello").toString()
-            is_pos.text = "fjeiow"
 
 
 //            val textView = findViewById<TextView>(R.id.is_pos)
 //            makeText(this@MainActivity, textView.text, LENGTH_SHORT).show();
-           // println(textView.text)
-//            textView.text = "hwllo"
         }
     }
 }
