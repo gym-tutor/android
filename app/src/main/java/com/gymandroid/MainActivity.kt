@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +24,8 @@ import kotlinx.android.synthetic.main.fragment_exercise.*
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
 import com.gymandroid.ui.exercise.ExercisingActivity
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,6 +61,10 @@ class MainActivity : AppCompatActivity() {
 
 
         // gyroscope parts end
+        clearRecords(this)
+        addRecords(this, ExerciseRecord(0, "Sit-ups", 98.6f, 2.7f, "nice"))
+        addRecords(this, ExerciseRecord(1, "Sit-ups", 98.6f, 2.7f, "nice"))
+        Log.d("getRecords", getRecords(this).toString())
     }
 
     fun startExercise(view: View) {
