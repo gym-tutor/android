@@ -24,7 +24,7 @@ data class ExerciseRecord(
     val correctRate: Float,  // rate of correct exercise motion detected during the exercise
     val hoursSpent: Float,  // hours spent on this exercise
     val analysis: String  // detailed analysis (e.g. Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...])
-)
+) : java.io.Serializable
 
 @Serializable
 private data class ExerciseRecords(val records: ArrayList<ExerciseRecord>) {

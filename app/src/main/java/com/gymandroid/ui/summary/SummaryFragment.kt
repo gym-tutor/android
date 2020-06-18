@@ -2,7 +2,6 @@ package com.gymandroid.ui.summary
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,18 +15,17 @@ import com.gymandroid.ExerciseRecord
 import com.gymandroid.R
 import com.gymandroid.SummaryDetailsActivity
 import com.gymandroid.getRecords
+import java.io.Serializable
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 
-fun Float.format(digits: Int) = "%.${digits}f".format(this)
-
-class Record(private val recordData: ExerciseRecord) {
+class Record(private val recordData: ExerciseRecord): Serializable {
     val type: String get() = recordData.type
     val analysis: String get() = recordData.analysis
+    val correctRate: Int get() = recordData.correctRate.roundToInt()
 
     val subtitle: String
         get() {
@@ -57,14 +55,13 @@ class Record(private val recordData: ExerciseRecord) {
             }
         }
 
-
     val description: String
         get() {
             return "${"%.1f".format(recordData.hoursSpent)} hours, ${recordData.correctRate.roundToInt()}% correct rate"
         }
 }
 
-class RecordCardAdapter(val items: List<Record>, val gotoDetails: () -> Unit) :
+class RecordCardAdapter(val items: List<Record>, val gotoDetails: (Record) -> Unit) :
     RecyclerView.Adapter<RecordCardAdapter.RecordHolder>() {
 
     class RecordHolder(val layout: LinearLayout) : RecyclerView.ViewHolder(layout)
@@ -86,7 +83,7 @@ class RecordCardAdapter(val items: List<Record>, val gotoDetails: () -> Unit) :
         holder.layout.findViewById<TextView>(R.id.summary_record_details).text =
             items[position].description
         holder.layout.setOnClickListener {
-            gotoDetails()
+            gotoDetails(items[position])
         }
     }
 
@@ -118,9 +115,10 @@ class SummaryFragment : Fragment() {
         return root
     }
 
-    val gotoDetailsPage: () -> Unit = {
-        Log.d("gotoDetailsPage", "entered")
-        startActivity(Intent(activity, SummaryDetailsActivity::class.java))
+    private val gotoDetailsPage: (Record) -> Unit = {
+        val intent = Intent(activity, SummaryDetailsActivity::class.java)
+        intent.putExtra("record", it)
+        startActivity(intent)
         activity?.overridePendingTransition(
             R.anim.enter_new_from_right,
             R.anim.enter_old_from_right

@@ -2,28 +2,34 @@ package com.gymandroid
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.gymandroid.ui.summary.Record
 import kotlinx.android.synthetic.main.activity_summary_details.*
 
 
 class SummaryDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val record: Record = intent.getSerializableExtra("record") as Record
+
         setContentView(R.layout.activity_summary_details)
+        summary_details_time.text = record.subtitle
+        summary_details_analysis.text = record.analysis
         summary_detail_bar.setOnClickListener {
             finish()
             overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
         }
 
-        inflateCorrectRateChart(85f)
+        inflateCorrectRateChart(record.correctRate)
     }
 
-    fun inflateCorrectRateChart(correctRate: Float) {
+    private fun inflateCorrectRateChart(correctRate: Int) {
         val pieChart = findViewById<PieChart>(R.id.piechart)
         val correctRateData = ArrayList<PieEntry>()
 
