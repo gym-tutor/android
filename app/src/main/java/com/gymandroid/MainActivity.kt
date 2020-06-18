@@ -8,9 +8,11 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toast.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_exercise.*
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
 import com.gymandroid.ui.exercise.ExercisingActivity
+import kotlinx.android.synthetic.main.fragment_exercise.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.DarkTheme);
+            setTheme(R.style.DarkTheme)
         } else {setTheme(R.style.AppTheme);}
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -58,12 +61,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startExercise(view: View) {
-        Toast.makeText(this@MainActivity, "Starting Exercise !", Toast.LENGTH_SHORT).show();
+        makeText(this@MainActivity, "Starting Exercise !", LENGTH_SHORT).show()
         startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
     }
 
     fun startExercisingPage(view: View) {
-        Toast.makeText(this@MainActivity, "Exercising Page !", Toast.LENGTH_SHORT).show();
+        makeText(this@MainActivity, "Exercising Page !", LENGTH_SHORT).show()
         startActivity(Intent(this@MainActivity, ExercisingActivity::class.java))
     }
 
@@ -78,6 +81,9 @@ class MainActivity : AppCompatActivity() {
         sensorManager!!.unregisterListener(gyroListener)
     }
 
+    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+
+
     private var gyroListener: SensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor, acc: Int) {}
         override fun onSensorChanged(event: SensorEvent) {
@@ -85,7 +91,14 @@ class MainActivity : AppCompatActivity() {
             val y = event.values[1]
             val z = event.values[2]
 
-            //is_pos.setText("hello").toString()
+//            is_pos.setText("hello").toString()
+            is_pos.text = "fjeiow"
+
+
+//            val textView = findViewById<TextView>(R.id.is_pos)
+//            makeText(this@MainActivity, textView.text, LENGTH_SHORT).show();
+           // println(textView.text)
+//            textView.text = "hwllo"
         }
     }
 }
