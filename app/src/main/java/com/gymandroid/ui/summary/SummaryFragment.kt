@@ -25,7 +25,7 @@ import kotlin.math.roundToInt
 
 fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
-class Record(val recordData: ExerciseRecord) {
+class Record(private val recordData: ExerciseRecord) {
     val type: String get() = recordData.type
     val analysis: String get() = recordData.analysis
 
@@ -33,10 +33,10 @@ class Record(val recordData: ExerciseRecord) {
         get() {
             val past = Date(recordData.unixTimestamp * 1000)
             val now = Date()
-            val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime())
-            val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime())
-            val hours: Long = TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime())
-            val days: Long = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime())
+            val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(now.time - past.time)
+            val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(now.time - past.time)
+            val hours: Long = TimeUnit.MILLISECONDS.toHours(now.time - past.time)
+            val days: Long = TimeUnit.MILLISECONDS.toDays(now.time - past.time)
 
             when {
                 seconds < 60 -> {
