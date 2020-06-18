@@ -38,7 +38,7 @@ private data class ExerciseRecords(val records: ArrayList<ExerciseRecord>) {
 }
 
 /*
-* Add an exercise record to local storage
+* Add an exercise record to local storage, sorted by time (most recent to least recent)
 * Parameter activity: need to pass in the activity because of the implementation
 * */
 fun addRecords(activity: ComponentActivity, record: ExerciseRecord): Boolean {
@@ -47,6 +47,7 @@ fun addRecords(activity: ComponentActivity, record: ExerciseRecord): Boolean {
         sharedPref.getString("records", defaultRecordJSON) ?: defaultRecordJSON
     val records: ExerciseRecords = Json.parse(ExerciseRecords.serializer(), currentRecordsEncoded)
     records.records.add(record)
+    records.records.sortByDescending { it.unixTimestamp }
     val modifiedRecordsEncoded = json.stringify(ExerciseRecords.serializer(), records)
     with(sharedPref.edit()) {
         putString("records", modifiedRecordsEncoded)
