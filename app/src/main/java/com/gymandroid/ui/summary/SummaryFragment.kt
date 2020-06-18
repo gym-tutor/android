@@ -8,17 +8,61 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gymandroid.MainActivity
+import com.gymandroid.ExerciseRecord
 import com.gymandroid.R
 import com.gymandroid.SummaryDetailsActivity
+import com.gymandroid.getRecords
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
-class Record(val type: String, val subtitle: String, val description: String)
+
+fun Float.format(digits: Int) = "%.${digits}f".format(this)
+
+class Record(val recordData: ExerciseRecord) {
+    val type: String get() = recordData.type
+    val analysis: String get() = recordData.analysis
+
+    val subtitle: String
+        get() {
+            val past = Date(recordData.unixTimestamp * 1000)
+            val now = Date()
+            val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime())
+            val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime())
+            val hours: Long = TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime())
+            val days: Long = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime())
+
+            when {
+                seconds < 60 -> {
+                    return "$seconds seconds ago"
+                }
+                minutes < 60 -> {
+                    return "$minutes minutes ago"
+                }
+                hours < 24 -> {
+                    return "$hours hours ago"
+                }
+                days < 7 -> {
+                    return "$days days ago"
+                }
+                else -> {
+                    return SimpleDateFormat("HH:mm E L M, Y", Locale.getDefault()).format(past)
+                }
+            }
+        }
+
+
+    val description: String
+        get() {
+            return "${"%.1f".format(recordData.hoursSpent)} hours, ${recordData.correctRate.roundToInt()}% correct rate"
+        }
+}
 
 class RecordCardAdapter(val items: List<Record>, val gotoDetails: () -> Unit) :
     RecyclerView.Adapter<RecordCardAdapter.RecordHolder>() {
@@ -62,19 +106,8 @@ class SummaryFragment : Fragment() {
             ViewModelProviders.of(this).get(SummaryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_summary, container, false)
 
-        val records = listOf(
-            Record(
-                "Report",
-                "You exercised 4.8 hours last week",
-                "2.3 hours were spent on sit-ups, 1.9 hours were spent on push-ups, and 0.6 hours were spent on jogging."
-            ),
-            Record("Sit-ups", "2 hours ago", "2.3 hours, 86% correct rate"),
-            Record("Push-ups", "yesterday", "1.9 hours, 56% correct rate"),
-            Record("Jogging", "3 days ago", "0.6 hours, 22% correct rate"),
-            Record("Jogging", "3 days ago", "0.6 hours, 22% correct rate"),
-            Record("Jogging", "3 days ago", "0.6 hours, 22% correct rate"),
-            Record("Jogging", "3 days ago", "0.6 hours, 22% correct rate")
-        )
+        val recordsData = getRecords(activity!!)
+        val records = recordsData.map(::Record)
         val summaryRecordManager = LinearLayoutManager(activity)
         val summaryRecordAdapter = RecordCardAdapter(records, gotoDetailsPage)
         val summaryRecordList: RecyclerView = root.findViewById(R.id.summary_record_list)
@@ -88,6 +121,9 @@ class SummaryFragment : Fragment() {
     val gotoDetailsPage: () -> Unit = {
         Log.d("gotoDetailsPage", "entered")
         startActivity(Intent(activity, SummaryDetailsActivity::class.java))
-        activity?.overridePendingTransition(R.anim.enter_new_from_right, R.anim.enter_old_from_right)
+        activity?.overridePendingTransition(
+            R.anim.enter_new_from_right,
+            R.anim.enter_old_from_right
+        )
     }
 }

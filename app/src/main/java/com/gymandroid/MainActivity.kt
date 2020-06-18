@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_exercise.*
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
 import com.gymandroid.ui.exercise.ExercisingActivity
+import com.gymandroid.ui.summary.Record
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -34,9 +35,11 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.DarkTheme)
-        } else {setTheme(R.style.AppTheme);}
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -48,7 +51,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.settings_appbar_button -> {
                     // handle settings button click
                     startActivity(Intent(this, SettingsActivity::class.java))
-                    overridePendingTransition(R.anim.enter_new_from_right, R.anim.enter_old_from_right)
+                    overridePendingTransition(
+                        R.anim.enter_new_from_right,
+                        R.anim.enter_old_from_right
+                    )
                     true
                 }
                 else -> false
@@ -62,9 +68,19 @@ class MainActivity : AppCompatActivity() {
 
         // gyroscope parts end
         clearRecords(this)
-        addRecords(this, ExerciseRecord(0, "Sit-ups", 98.6f, 2.7f, "nice"))
-        addRecords(this, ExerciseRecord(1, "Sit-ups", 98.6f, 2.7f, "nice"))
-        Log.d("getRecords", getRecords(this).toString())
+        addRecords(
+            this,
+            ExerciseRecord(
+                0,
+                "Report",
+                98.6f,
+                0.7f,
+                "You exercised 4.8 hours last week. 2.3 hours were spent on sit-ups, 1.9 hours were spent on push-ups, and 0.6 hours were spent on jogging."
+            )
+        )
+        addRecords(this, ExerciseRecord(0, "Yoga", 98.6f, 1.1f, "nice"))
+        addRecords(this, ExerciseRecord(1592418400, "Sit-ups", 98.6f, 2.7f, "nice"))
+        addRecords(this, ExerciseRecord(1592438400, "Sit-ups", 98.6f, 5.7f, "nice"))
     }
 
     fun startExercise(view: View) {
@@ -88,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         sensorManager!!.unregisterListener(gyroListener)
     }
 
-    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+    fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 
     private var gyroListener: SensorEventListener = object : SensorEventListener {
