@@ -78,9 +78,9 @@ class MainActivity : AppCompatActivity() {
                 "You exercised 4.8 hours last week. 2.3 hours were spent on sit-ups, 1.9 hours were spent on push-ups, and 0.6 hours were spent on jogging."
             )
         )
-        addRecords(this, ExerciseRecord(1592438400, "Sit-ups", 98.6f, 5.7f, "nice"))
-        addRecords(this, ExerciseRecord(1592418400, "Sit-ups", 98.6f, 2.7f, "nice"))
-        addRecords(this, ExerciseRecord(1092418400, "Yoga", 98.6f, 1.1f, "nice"))
+        addRecords(this, ExerciseRecord(1592438400, "Sit-ups", 98.6f, 5.7f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
+        addRecords(this, ExerciseRecord(1592418400, "Sit-ups", 98.6f, 2.7f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
+        addRecords(this, ExerciseRecord(1092418400, "Yoga", 98.6f, 1.1f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
     }
 
     fun startExercise(view: View) {
