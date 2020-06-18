@@ -1,25 +1,29 @@
+/*
+* Defines data structures and API interfaces used for exercise records
+* */
+
+
 package com.gymandroid
 
-import android.app.Activity
 import android.content.Context
 import androidx.activity.ComponentActivity
-import com.gymandroid.ui.summary.Record
-import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.json.Json
-import java.time.LocalDateTime
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonConfiguration
 
 private val json = Json(JsonConfiguration.Stable.copy())
 private val defaultRecordJSON = "{\"records\": []}"
 
+/*
+* The smallest unit of exercise record
+* */
 @Serializable
 data class ExerciseRecord(
-    val unixTimestamp: Long,
-    val type: String,
-    val correctRate: Float,
-    val hoursSpent: Float,
-    val analysis: String
+    val unixTimestamp: Long,  // timestamp in unix format
+    val type: String,  // type of exercise (e.g. sit-up, push-up)
+    val correctRate: Float,  // rate of correct exercise motion detected during the exercise
+    val hoursSpent: Float,  // hours spent on this exercise
+    val analysis: String  // detailed analysis (e.g. Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...])
 )
 
 @Serializable
@@ -33,13 +37,16 @@ private data class ExerciseRecords(val records: ArrayList<ExerciseRecord>) {
     }
 }
 
+/*
+* Add an exercise record to local storage
+* Parameter activity: need to pass in the activity because of the implementation
+* */
 fun addRecords(activity: ComponentActivity, record: ExerciseRecord): Boolean {
     val sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
     val currentRecordsEncoded =
         sharedPref.getString("records", defaultRecordJSON) ?: defaultRecordJSON
     val records: ExerciseRecords = Json.parse(ExerciseRecords.serializer(), currentRecordsEncoded)
     records.records.add(record)
-
     val modifiedRecordsEncoded = json.stringify(ExerciseRecords.serializer(), records)
     with(sharedPref.edit()) {
         putString("records", modifiedRecordsEncoded)
@@ -48,7 +55,9 @@ fun addRecords(activity: ComponentActivity, record: ExerciseRecord): Boolean {
     return true
 }
 
-
+/*
+* Return a list of exercise records stored locally
+* */
 fun getRecords(activity: ComponentActivity): ArrayList<ExerciseRecord> {
     val sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
     val currentRecordsEncoded =
@@ -57,6 +66,9 @@ fun getRecords(activity: ComponentActivity): ArrayList<ExerciseRecord> {
     return records.records
 }
 
+/*
+* Delete all locally stored exercise records
+* */
 fun clearRecords(activity: ComponentActivity) {
     val sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
     with(sharedPref.edit()) {
