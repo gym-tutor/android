@@ -1,38 +1,32 @@
 package com.gymandroid
 
 import android.content.Context
-import android.content.Context.SENSOR_SERVICE
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toast.*
+import android.widget.Toast.LENGTH_SHORT
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.gymandroid.ui.exercise.ExercisingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_exercise.*
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
-import com.gymandroid.ui.exercise.ExercisingActivity
-import com.gymandroid.ui.summary.Record
-import kotlinx.android.synthetic.main.fragment_exercise.view.*
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
     var sensorManager: SensorManager? = null
     var sensor: Sensor? = null
 
+    var textY: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -43,6 +37,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        ///////////////////////////////////////////////////////////////////////
+        textY = findViewById(R.id.is_pos)
+        textY?.text = "Y : " + " rad/s"
+        //////////////////////////////////////////////////////////////////////
 
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
@@ -104,21 +102,18 @@ class MainActivity : AppCompatActivity() {
         sensorManager!!.unregisterListener(gyroListener)
     }
 
-    fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
+//    fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 
     private var gyroListener: SensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor, acc: Int) {}
+
         override fun onSensorChanged(event: SensorEvent) {
             val x = event.values[0]
             val y = event.values[1]
             val z = event.values[2]
 
-//            is_pos.setText("hello").toString()
-
-
-//            val textView = findViewById<TextView>(R.id.is_pos)
-//            makeText(this@MainActivity, textView.text, LENGTH_SHORT).show();
+            is_pos?.text = "Y : " + y.toInt() + " rad/s"
         }
     }
 }
