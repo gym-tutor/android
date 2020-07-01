@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BackEnd"></activity>
         <activity
             android:name=".ui.exercise.excerciseListActivity"
             android:label="@string/title_excercise_list"

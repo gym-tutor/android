@@ -78,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
     fun startExercise(view: View) {
         makeText(this@MainActivity, "Starting Exercise !", LENGTH_SHORT).show()
-        startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
+        //startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
+        startActivity(Intent(this@MainActivity, BackEnd::class.java))
     }
 
     fun startExercisingPage(view: View) {
