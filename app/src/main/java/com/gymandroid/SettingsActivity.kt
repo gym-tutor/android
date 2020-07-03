@@ -13,7 +13,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.DarkTheme);
-        } else{
+        } else {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState)
@@ -34,6 +34,7 @@ class SettingsActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+        /*
         val bmi: Button = findViewById(R.id.calculate_bmi) as Button
         bmi.setOnClickListener{
             val height: EditText = findViewById(R.id.height) as EditText
@@ -43,6 +44,6 @@ class SettingsActivity : AppCompatActivity() {
             val bmivalue: Double = weightvalue/(heightvalue*heightvalue/10000)
             val bmi_output: TextView = findViewById(R.id.bmi) as TextView
             bmi_output.text ="%.2f".format(bmivalue)
-        }
+        }*/
     }
 }
