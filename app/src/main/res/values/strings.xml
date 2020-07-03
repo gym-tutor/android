@@ -9,4 +9,5 @@
     <string name="title_excercise_detail">excercise Detail</string>
     <string name="note_pos">Note: Please make sure the phone is placed in the right position so that your body is in the phone screen</string>
     <string name="pos">Position: needs adjust !</string>
+    <string name="start_ex">Start Excersice !</string>
 </resources>

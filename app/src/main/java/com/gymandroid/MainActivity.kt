@@ -37,11 +37,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        ///////////////////////////////////////////////////////////////////////
-        textY = findViewById(R.id.is_pos)
-        textY?.text = "Y : " + " rad/s"
-        //////////////////////////////////////////////////////////////////////
-
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
         app_bar.setOnMenuItemClickListener {
@@ -83,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
     fun startExercise(view: View) {
         makeText(this@MainActivity, "Starting Exercise !", LENGTH_SHORT).show()
-        startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
+        //startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
+        startActivity(Intent(this@MainActivity, BackEnd::class.java))
     }
 
     fun startExercisingPage(view: View) {
@@ -113,7 +109,12 @@ class MainActivity : AppCompatActivity() {
             val y = event.values[1]
             val z = event.values[2]
 
-            is_pos?.text = "Y : " + y.toInt() + " rad/s"
+            if (-80< y.toInt() && y.toInt() < -60) {
+                is_pos?.text = "Position Good !"
+            } else {
+                is_pos?.text = "Position: needs adjust !"
+            }
+//            is_pos?.text = "Y : " + y.toInt() + " rad/s"
         }
     }
 }
