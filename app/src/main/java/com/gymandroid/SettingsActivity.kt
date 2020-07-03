@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_setting.*
+import kotlinx.android.synthetic.main.activity_setting.settings_bar
+import kotlinx.android.synthetic.main.activity_setting_account.*
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -36,7 +39,26 @@ class SettingsActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+        val account: LinearLayout = findViewById(R.id.account)
+        account.setOnClickListener{
+            setContentView(R.layout.activity_setting_account)
+            settings_bar.setOnClickListener{
+                setContentView(R.layout.activity_setting)
+            }
+        }
 
+        val notification: LinearLayout = findViewById(R.id.message_notifications)
+        notification.setOnClickListener{
+            setContentView(R.layout.activity_setting_notification)
+            overridePendingTransition(
+                R.anim.enter_new_from_right,
+                R.anim.enter_old_from_right
+            )
+            settings_bar.setOnClickListener {
+                setContentView(R.layout.activity_setting)
+                overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
+            }
+        }
         /*
         val bmi: Button = findViewById(R.id.calculate_bmi) as Button
         bmi.setOnClickListener{
