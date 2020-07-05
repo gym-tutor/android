@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/backgroundcolor">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/account_bar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
+        app:title="Settings" />
+    <TextView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/black"
+        android:textSize="25dp"
+        android:text="Name: NULL\nContact number: 0406123456\nEmail: NULL@gmail.com\n
+Address: UNSW CSE Kensington Sydney Australia"></TextView>
+
+
+</LinearLayout>

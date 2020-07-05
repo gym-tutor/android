@@ -69,5 +69,17 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val contactus: LinearLayout = findViewById(R.id.contact_us)
+        contactus.setOnClickListener{
+            val intent = Intent(this, SettingsAccount::class.java)
+            intent.putExtra("Page",4)
+            startActivity(intent)
+        }
+        val aboutus: LinearLayout = findViewById(R.id.about)
+        aboutus.setOnClickListener{
+            val intent = Intent(this, SettingsAccount::class.java)
+            intent.putExtra("Page",5)
+            startActivity(intent)
+        }
     }
 }

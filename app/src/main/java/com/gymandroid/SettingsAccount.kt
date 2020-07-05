@@ -35,6 +35,10 @@ class SettingsAccount : AppCompatActivity() {
                 val bmi_output: TextView = findViewById(R.id.bmi) as TextView
                 bmi_output.text ="%.2f".format(bmivalue)
             }
+        }else if(page == 4){
+            setContentView(R.layout.activity_setting_contactus)
+        } else if(page == 5){
+            setContentView(R.layout.activity_setting_aboutus)
         }
         account_bar.setOnClickListener {
             finish()
