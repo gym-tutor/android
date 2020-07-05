@@ -2,6 +2,7 @@ package com.gymandroid
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -39,36 +40,34 @@ class SettingsActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+
         val account: LinearLayout = findViewById(R.id.account)
         account.setOnClickListener{
-            setContentView(R.layout.activity_setting_account)
-            settings_bar.setOnClickListener{
-                setContentView(R.layout.activity_setting)
-            }
+            val intent = Intent(this, SettingsAccount::class.java)
+            intent.putExtra("Page",0)
+            startActivity(intent)
         }
 
         val notification: LinearLayout = findViewById(R.id.message_notifications)
         notification.setOnClickListener{
-            setContentView(R.layout.activity_setting_notification)
-            overridePendingTransition(
-                R.anim.enter_new_from_right,
-                R.anim.enter_old_from_right
-            )
-            settings_bar.setOnClickListener {
-                setContentView(R.layout.activity_setting)
-                overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
-            }
+            val intent = Intent(this, SettingsAccount::class.java)
+            intent.putExtra("Page",1)
+            startActivity(intent)
         }
-        /*
-        val bmi: Button = findViewById(R.id.calculate_bmi) as Button
-        bmi.setOnClickListener{
-            val height: EditText = findViewById(R.id.height) as EditText
-            val heightvalue:Double = height.text.toString().toDouble()
-            val weight: EditText = findViewById(R.id.weight) as EditText
-            val weightvalue:Double = weight.text.toString().toDouble()
-            val bmivalue: Double = weightvalue/(heightvalue*heightvalue/10000)
-            val bmi_output: TextView = findViewById(R.id.bmi) as TextView
-            bmi_output.text ="%.2f".format(bmivalue)
-        }*/
+
+        val priavacy: LinearLayout = findViewById(R.id.priavacy)
+        priavacy.setOnClickListener{
+            val intent = Intent(this, SettingsAccount::class.java)
+            intent.putExtra("Page",2)
+            startActivity(intent)
+        }
+
+        val general: LinearLayout = findViewById(R.id.general)
+        general.setOnClickListener{
+            val intent = Intent(this, SettingsAccount::class.java)
+            intent.putExtra("Page",3)
+            startActivity(intent)
+        }
+
     }
 }

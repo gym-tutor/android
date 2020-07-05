@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".SummaryDetailsActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".SettingsAccount" />
     </application>
 
 </manifest>
