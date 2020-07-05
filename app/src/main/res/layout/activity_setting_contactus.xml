@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
-        app:title="Settings" />
+        app:title="Contact Us" />
     <TextView android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
