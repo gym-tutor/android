@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000">
 
     <VideoView
         android:id="@+id/exercising_video"
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5"
+        android:textColor="#eee"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
         android:text="Description Header"
-        android:textColor="#000"
+        android:textColor="#fff"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exercising_info" />
@@ -41,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+        android:textColor="#eee"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exercising_header" />
@@ -51,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
         android:text="DESCRIPTION TAIL"
+        android:textColor="#eee"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exercising_detail" />
