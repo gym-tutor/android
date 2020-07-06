@@ -16,6 +16,7 @@ object DummyContent {
      */
     val ITEMS: MutableList<DummyItem> = ArrayList()
     private val moves = listOfNotNull<String>("tree", "cobra")
+    private val details = listOfNotNull<String>("this is tree youga", "this is cobra youga")
 
 
     /**
@@ -44,10 +45,7 @@ object DummyContent {
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
+        builder.append(details[position-1])
         return builder.toString()
     }
 

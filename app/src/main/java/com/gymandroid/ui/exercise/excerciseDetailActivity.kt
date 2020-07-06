@@ -1,12 +1,18 @@
 package com.gymandroid.ui.exercise
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
+import android.widget.MediaController
+import android.widget.VideoView
 import com.gymandroid.R
 import kotlinx.android.synthetic.main.activity_excercise_detail.*
+import kotlinx.android.synthetic.main.activity_excercise_detail.videoView as videoView1
 
 /**
  * An activity representing a single excercise detail screen. This
@@ -16,18 +22,21 @@ import kotlinx.android.synthetic.main.activity_excercise_detail.*
  */
 class excerciseDetailActivity : AppCompatActivity() {
 
+    private lateinit var videoView2: VideoView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excercise_detail)
-        setSupportActionBar(detail_toolbar)
+//        setSupportActionBar(detail_toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
 
         // Show the Up button in the action bar.
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -38,6 +47,26 @@ class excerciseDetailActivity : AppCompatActivity() {
         //
         // http://developer.android.com/guide/components/fragments.html
         //
+
+
+
+        videoView2 = findViewById(R.id.videoView)
+
+        videoView2.setVideoURI(
+            // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
+//            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
+            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
+
+        )
+        videoView2.start()
+//        val ctrl = MediaController(this)
+//        ctrl.visibility = View.GONE
+//        ctrl.setMediaPlayer(videoView)
+//        videoView.setMediaController(ctrl)
+//        ctrl.hide()
+
+
+        //intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID)
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
