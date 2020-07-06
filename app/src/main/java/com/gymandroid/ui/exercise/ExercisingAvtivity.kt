@@ -29,7 +29,7 @@ class ExercisingActivity : AppCompatActivity() {
 
         videoView.setVideoURI(
             // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.yoga_example)
+            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
         )
 
         // hide controls
@@ -47,19 +47,19 @@ class ExercisingActivity : AppCompatActivity() {
     }
 
     fun blink() {
+        if (!isPlaying) {
+            isPlaying = true
+            Handler().postDelayed({
+                val animation: Animation = AlphaAnimation(0f, 1f)
+                animation.duration = 300
+                videoView.startAnimation(animation)
+                videoView.alpha = 1f
+                videoView.start()
+            }, 0)
+        }
         --countdownNumber
         if (countdownNumber < 0) {
             infoView.text = "Exercising"
-            if (!isPlaying) {
-                isPlaying = true
-                Handler().postDelayed({
-                    val animation: Animation = AlphaAnimation(0f, 1f)
-                    animation.duration = 300
-                    videoView.startAnimation(animation)
-                    videoView.alpha = 1f
-                    videoView.start()
-                }, 1500)
-            }
         } else if (countdownNumber == 0) {
             infoView.text= "Ready..."
         } else {
