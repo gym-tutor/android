@@ -15,19 +15,22 @@ object DummyContent {
      * An array of sample (dummy) items.
      */
     val ITEMS: MutableList<DummyItem> = ArrayList()
+    private val moves = listOfNotNull<String>("tree", "cobra")
+
 
     /**
      * A map of sample (dummy) items, by ID.
      */
     val ITEM_MAP: MutableMap<String, DummyItem> = HashMap()
 
-    private val COUNT = 25
+    private val COUNT = 2
 
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createDummyItem(i))
+            addItem(createDummyItem(i, moves[i-1].toString()))
         }
+
     }
 
     private fun addItem(item: DummyItem) {
@@ -35,8 +38,8 @@ object DummyContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Item " + position, makeDetails(position))
+    private fun createDummyItem(position: Int, name: String): DummyItem {
+        return DummyItem(position.toString(), name, makeDetails(position))
     }
 
     private fun makeDetails(position: Int): String {
