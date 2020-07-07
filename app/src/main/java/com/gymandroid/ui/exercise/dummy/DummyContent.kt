@@ -17,6 +17,7 @@ object DummyContent {
     val ITEMS: MutableList<DummyItem> = ArrayList()
     private val moves = listOfNotNull<String>("tree", "cobra")
     private val details = listOfNotNull<String>("this is tree youga", "this is cobra youga")
+    private val uries = listOfNotNull<Int>( 2131755012, 2131755008)
 
 
     /**
@@ -40,7 +41,7 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int, name: String): DummyItem {
-        return DummyItem(position.toString(), name, makeDetails(position))
+        return DummyItem(position.toString(), name, makeDetails(position), uries[position - 1])
     }
 
     private fun makeDetails(position: Int): String {
@@ -52,7 +53,7 @@ object DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    data class DummyItem(val id: String, val content: String, val details: String) {
+    data class DummyItem(val id: String, val content: String, val details: String, val uri: Int) {
         override fun toString(): String = content
     }
 }

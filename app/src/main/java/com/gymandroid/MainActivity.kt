@@ -18,6 +18,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gymandroid.ui.exercise.ExercisingActivity
+import com.gymandroid.ui.exercise.gyroscope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_exercise.*
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
@@ -55,11 +56,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // gyroscope parts start
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
-
-        // gyroscope parts end
+//        // gyroscope parts start
+//        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//        sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+//
+//        // gyroscope parts end
         clearRecords(this)
         addRecords(
             this,
@@ -88,35 +89,36 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        sensorManager!!.registerListener(gyroListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
-    }
 
-    override fun onStop() {
-        super.onStop()
-        sensorManager!!.unregisterListener(gyroListener)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        sensorManager!!.registerListener(gyroListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        sensorManager!!.unregisterListener(gyroListener)
+//    }
 
 //    fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 
-    private var gyroListener: SensorEventListener = object : SensorEventListener {
-        override fun onAccuracyChanged(sensor: Sensor, acc: Int) {}
-
-        override fun onSensorChanged(event: SensorEvent) {
-            val x = event.values[0]
-            val y = event.values[1]
-            val z = event.values[2]
-
-            if (-80< y.toInt() && y.toInt() < -60) {
-                is_pos?.text = "Position Good !"
-            } else {
-                is_pos?.text = "Position: needs adjust !"
-            }
-//            is_pos?.text = "Y : " + y.toInt() + " rad/s"
-        }
-    }
+//    private var gyroListener: SensorEventListener = object : SensorEventListener {
+//        override fun onAccuracyChanged(sensor: Sensor, acc: Int) {}
+//
+//        override fun onSensorChanged(event: SensorEvent) {
+//            val x = event.values[0]
+//            val y = event.values[1]
+//            val z = event.values[2]
+//
+//            if (-80< y.toInt() && y.toInt() < -60) {
+//                is_pos?.text = "Position Good !"
+//            } else {
+//                is_pos?.text = "Position: needs adjust !"
+//            }
+////            is_pos?.text = "Y : " + y.toInt() + " rad/s"
+//        }
+//    }
 }
 
 
