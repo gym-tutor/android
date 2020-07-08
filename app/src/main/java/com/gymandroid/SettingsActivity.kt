@@ -30,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val colortheme: Switch = findViewById(R.id.change_theme) as Switch
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            colortheme.isChecked;
+            colortheme.isChecked = true;
         }
         colortheme.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
