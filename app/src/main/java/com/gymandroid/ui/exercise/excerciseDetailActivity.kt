@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.MediaController
 import android.widget.VideoView
 import com.gymandroid.R
+import com.gymandroid.ui.exercise.dummy.DummyContent
 import com.gymandroid.ui.exercise.dummy.DummyContent.ITEMS
 import kotlinx.android.synthetic.main.activity_excercise_detail.*
 import kotlinx.android.synthetic.main.activity_excercise_detail.videoView as videoView1
@@ -45,7 +46,9 @@ class excerciseDetailActivity : AppCompatActivity() {
         )
         videoView2.start()
 
-
+        textView.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].content
+        detail.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].details
+        caution.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].caution
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.

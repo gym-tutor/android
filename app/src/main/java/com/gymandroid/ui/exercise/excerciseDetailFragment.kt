@@ -45,7 +45,7 @@ class excerciseDetailFragment : Fragment() {
 
         // Show the dummy content as text in a TextView.
         item?.let {
-            rootView.excercise_detail.text = it.details
+            rootView.excercise_detail.text = null
         }
 
         return rootView
