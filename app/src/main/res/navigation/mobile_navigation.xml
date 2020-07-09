@@ -15,14 +15,5 @@
         android:id="@+id/navigation_exercise"
         android:name="com.gymandroid.ui.exercise.ExerciseFragment"
         android:label="@string/title_exercise"
-        tools:layout="@layout/fragment_exercise" >
-        <action
-            android:id="@+id/action_navigation_exercise_to_navigation_summary"
-            app:destination="@id/navigation_summary"
-            app:exitAnim="@anim/exit_new_from_right"
-            app:launchSingleTop="false"
-            app:popExitAnim="@anim/enter_new_from_right"
-            app:popUpTo="@id/navigation_summary"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_exercise" />
 </navigation>

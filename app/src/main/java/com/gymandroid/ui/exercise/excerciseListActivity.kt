@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import com.gymandroid.MainActivity
 import com.gymandroid.R
 
 import com.gymandroid.ui.exercise.dummy.DummyContent
@@ -33,6 +34,11 @@ class excerciseListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@excerciseListActivity, MainActivity::class.java))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excercise_list)
@@ -40,6 +46,8 @@ class excerciseListActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = title
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+//        supportActionBar?.setDisplayShowHomeEnabled(true);
 
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
