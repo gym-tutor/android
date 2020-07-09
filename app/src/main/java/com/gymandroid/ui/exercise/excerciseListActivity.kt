@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import com.gymandroid.R
 
 import com.gymandroid.ui.exercise.dummy.DummyContent
@@ -36,6 +37,7 @@ class excerciseListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excercise_list)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = title
 
@@ -90,6 +92,7 @@ class excerciseListActivity : AppCompatActivity() {
             }
         }
 
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.excercise_list_content, parent, false)
@@ -106,6 +109,8 @@ class excerciseListActivity : AppCompatActivity() {
                 setOnClickListener(onClickListener)
             }
         }
+
+
 
         override fun getItemCount() = values.size
 
