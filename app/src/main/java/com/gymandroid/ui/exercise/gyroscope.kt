@@ -2,6 +2,7 @@ package com.gymandroid.ui.exercise
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.SurfaceTexture
 import android.hardware.Sensor
@@ -21,7 +22,9 @@ import android.view.TextureView
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.gymandroid.Helper
 import com.gymandroid.R
+import com.gymandroid.YogaActivity
 import kotlinx.android.synthetic.main.activity_gyroscope.*
 import java.io.File
 import java.util.*
@@ -31,6 +34,7 @@ class gyroscope : AppCompatActivity() {
 
     var sensorManager: SensorManager? = null
     var sensor: Sensor? = null
+    lateinit var helper: Helper
 
 //    private val TAG = "AndroidCameraApi"
 //    private var textureView: TextureView? = null
@@ -56,6 +60,13 @@ class gyroscope : AppCompatActivity() {
         // gyroscope parts start
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+        helper = Helper.getInstance(this)
+        if (!helper.camera.allPermissionsGranted()){
+            ActivityCompat.requestPermissions(this,helper.camera.getPermissions(),
+                helper.camera.getPermissionsCode())
+            Log.e("Main","Cammera not granted")
+
+        }
 
         // gyroscope parts end
 
@@ -65,6 +76,10 @@ class gyroscope : AppCompatActivity() {
 //        textureView!!.surfaceTextureListener = textureListener
 
         // camera preview
+        start_exercising_btn.setOnClickListener {
+            val intent = Intent(this, YogaActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -88,7 +103,7 @@ class gyroscope : AppCompatActivity() {
             if (-85< y.toInt() && y.toInt() < -45) {
                 textView5?.text = "Position Good !"
                 progressBar.setProgress(100, true)
-                button4.isClickable = true
+                start_exercising_btn.isClickable = true
             } else {
                 textView5?.text = "Position: needs adjust !"
                 if (y.toInt() < -85) {
@@ -97,7 +112,7 @@ class gyroscope : AppCompatActivity() {
                     progressBar.setProgress(((y.toInt() - 115).absoluteValue / 1.6).toInt(), true)
                 }
 
-                button4.isClickable = false
+                start_exercising_btn.isClickable = false
             }
 //            is_pos?.text = "Y : " + y.toInt() + " rad/s"
         }
@@ -238,6 +253,21 @@ class gyroscope : AppCompatActivity() {
 //            e.printStackTrace()
 //        }
 //    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults.isNotEmpty() && grantResults[0] ==
+            PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission Accepted", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 
 
 }
