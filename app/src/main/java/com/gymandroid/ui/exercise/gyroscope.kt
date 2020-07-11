@@ -103,7 +103,7 @@ class gyroscope : AppCompatActivity() {
             if (-85< y.toInt() && y.toInt() < -45) {
                 textView5?.text = "Position Good !"
                 progressBar.setProgress(100, true)
-                start_exercising_btn.isClickable = true
+//                start_exercising_btn.isClickable = true
             } else {
                 textView5?.text = "Position: needs adjust !"
                 if (y.toInt() < -85) {
@@ -112,7 +112,7 @@ class gyroscope : AppCompatActivity() {
                     progressBar.setProgress(((y.toInt() - 115).absoluteValue / 1.6).toInt(), true)
                 }
 
-                start_exercising_btn.isClickable = false
+//                start_exercising_btn.isClickable = false
             }
 //            is_pos?.text = "Y : " + y.toInt() + " rad/s"
         }
