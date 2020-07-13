@@ -29,12 +29,12 @@ class YogaActivity: AppCompatActivity() {
         val pose_name = if(pose_id ==0) "tree" else "cobra"
         yogaPose = YogaPose(pose_name, helper)
 
-        pause_btn.setOnClickListener {
-            yogaPose.pause()
-        }
-        continue_btn.setOnClickListener{
-            yogaPose.resume()
-        }
+//        pause_btn.setOnClickListener {
+//            yogaPose.pause()
+//        }
+//        continue_btn.setOnClickListener{
+//            yogaPose.resume()
+//        }
         yogaPose.onEndState = {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
