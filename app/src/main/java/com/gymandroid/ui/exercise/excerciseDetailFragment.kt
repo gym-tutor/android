@@ -42,10 +42,12 @@ class excerciseDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.excercise_detail, container, false)
+//        val rootView2 = inflater.inflate(R.layout.excercise_caution, container, false)
 
         // Show the dummy content as text in a TextView.
         item?.let {
             rootView.excercise_detail.text = null
+//            rootView2.excercise_caution.text = item?.caution
         }
 
         return rootView

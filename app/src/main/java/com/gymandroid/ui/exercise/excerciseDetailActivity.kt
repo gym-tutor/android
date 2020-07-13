@@ -48,8 +48,8 @@ class excerciseDetailActivity : AppCompatActivity() {
         videoView2.start()
         pose_id = intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt()-1
         textView.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].content
-        detail.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].details
-        caution.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].caution
+        detail?.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].details
+        caution?.text = ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].caution
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
