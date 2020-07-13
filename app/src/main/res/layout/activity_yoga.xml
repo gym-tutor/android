@@ -20,11 +20,11 @@
         android:layout_height = "wrap_content"
         android:background="#000000"
         android:gravity="center"
-        android:layout_weight=".6">
+        android:layout_weight="1">
         <VideoView
             android:id="@+id/videoView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical" />
 
     </LinearLayout>
