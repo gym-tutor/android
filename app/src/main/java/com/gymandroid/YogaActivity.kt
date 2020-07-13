@@ -5,8 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.gymandroid.ui.exercise.excerciseDetailFragment
 import kotlinx.android.synthetic.main.activity_yoga.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
 
 class YogaActivity: AppCompatActivity() {
     var job: Job? = null
@@ -23,7 +24,11 @@ class YogaActivity: AppCompatActivity() {
                 Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
             }
         }
-        yogaPose = YogaPose("tree", helper)
+
+        val pose_id = intent.getIntExtra("POSE_ID",0)
+        val pose_name = if(pose_id ==0) "tree" else "cobra"
+        yogaPose = YogaPose(pose_name, helper)
+
         pause_btn.setOnClickListener {
             yogaPose.pause()
         }
@@ -35,11 +40,7 @@ class YogaActivity: AppCompatActivity() {
             startActivity(intent)
         }
         yogaPose.start()
-        var videolist = ArrayList<Int>()
-        videolist.add(R.raw.tree_1)
-        videolist.add(R.raw.tree_2)
-        videolist.add(R.raw.tree_3)
-        videolist.add(R.raw.tree_4)
+        val videolist = getVideoList(pose_name)
 
         videoView.setOnPreparedListener {
             videoView.start()
@@ -62,6 +63,26 @@ class YogaActivity: AppCompatActivity() {
 
     }
 
+    private fun getVideoList(pose_name:String):ArrayList<Int>{
+        var videolist = ArrayList<Int>()
+        when(pose_name){
+            "tree" -> {
+                videolist.add(R.raw.tree_1)
+                videolist.add(R.raw.tree_2)
+                videolist.add(R.raw.tree_3)
+                videolist.add(R.raw.tree_4)
+            }
+
+            "cobra" -> {
+                videolist.add(R.raw.cobra_1)
+                videolist.add(R.raw.cobra_2)
+                videolist.add(R.raw.cobra_3)
+            }
+
+        }
+        return videolist
+
+    }
     override fun onStart() {
 
         super.onStart()

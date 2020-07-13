@@ -1,5 +1,6 @@
 package com.gymandroid.ui.exercise.dummy
 
+import com.gymandroid.R
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -24,7 +25,7 @@ object DummyContent {
         "Due to the balancing nature of the posture, do not practice Tree Pose if you are currently experiencing headaches, insomnia, low blood pressure, or if you are lightheaded and/or dizzy. Those with high blood pressure should not raise their arms overhead in the pose. ",
         "Please do not practice Cobra if you have carpal tunnel syndrome, or a recent back or wrist injury. Women who are pregnant should avoid practicing this pose while on the floor, although they may practice it standing with their palms against a wall. "
     )
-    private val uries = listOfNotNull<Int>( 2131755012, 2131755008)
+    private val uries = listOfNotNull<Int>(R.raw.tree, R.raw.cobra)
 
 
     /**
