@@ -30,7 +30,7 @@ class BreathStep(pose:String,id:Int,helper: Helper): Step(pose,id,helper){
     }
 
     private suspend fun breath(){
-        speak("breath " + breath_times.toString() + " times")
+
         for(i in 1 .. breath_times){
             makeBreathVoice()
         }
@@ -42,6 +42,7 @@ class BreathStep(pose:String,id:Int,helper: Helper): Step(pose,id,helper){
         delay(2000)
 
         var result: JSONObject? = null
+        this.speak("breath " + breath_times.toString() + " times")
         var a = launch{breath ()}
         Log.e("In Photo Step","thread 2 ")
         result = sendInfoToBackend(takePhoto()!!)

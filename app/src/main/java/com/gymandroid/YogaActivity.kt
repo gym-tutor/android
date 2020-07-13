@@ -3,6 +3,7 @@ package com.gymandroid
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_yoga.*
 import kotlinx.coroutines.*
@@ -17,6 +18,11 @@ class YogaActivity: AppCompatActivity() {
 
         helper = Helper.getInstance(this)
         helper.start(this)
+        helper.speaker.onMessageChange = {
+            runOnUiThread {
+                Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
+            }
+        }
         yogaPose = YogaPose("tree", helper)
         pause_btn.setOnClickListener {
             yogaPose.pause()
