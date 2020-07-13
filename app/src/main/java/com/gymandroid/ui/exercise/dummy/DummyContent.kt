@@ -17,12 +17,12 @@ object DummyContent {
     val ITEMS: MutableList<DummyItem> = ArrayList()
     private val moves = listOfNotNull<String>("Tree", "Cobra")
     private val details = listOfNotNull<String>(
-        "Tree Pose stretches the thighs, groins, torso, and shoulders. It builds strength in the ankles and calves, and tones the abdominal muscles. The pose also helps to remedy flat feet and is therapeutic for sciatica.",
-        "Cobra Pose is best known for its ability to increase the flexibility of the spine. It stretches the chest while strengthening the spine and shoulders. It also helps to open the lungs, which is therapeutic for asthma. This pose also stimulates the abdominal organs, improving digestion."
+        "Tree Pose stretches the thighs, groins, torso, and shoulders. It builds strength in the ankles and calves",
+        "Cobra Pose is best known for its ability to increase the flexibility of the spine. "
     )
     private val cautions = listOfNotNull<String>(
-        "Due to the balancing nature of the posture, do not practice Tree Pose if you are currently experiencing headaches, insomnia, low blood pressure, or if you are lightheaded and/or dizzy. Those with high blood pressure should not raise their arms overhead in the pose. Always work within your own range of limits and abilities. If you have any medical concerns, talk with your doctor before practicing yoga.",
-        "Please do not practice Cobra if you have carpal tunnel syndrome, or a recent back or wrist injury. Women who are pregnant should avoid practicing this pose while on the floor, although they may practice it standing with their palms against a wall. Always work within your own range of limits and abilities. If you have any medical concerns, talk with your doctor before practicing yoga."
+        "Due to the balancing nature of the posture, do not practice Tree Pose if you are currently experiencing headaches, insomnia, low blood pressure, or if you are lightheaded and/or dizzy. Those with high blood pressure should not raise their arms overhead in the pose. ",
+        "Please do not practice Cobra if you have carpal tunnel syndrome, or a recent back or wrist injury. Women who are pregnant should avoid practicing this pose while on the floor, although they may practice it standing with their palms against a wall. "
     )
     private val uries = listOfNotNull<Int>( 2131755012, 2131755008)
 

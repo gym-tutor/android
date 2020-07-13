@@ -30,14 +30,9 @@ class BreathStep(pose:String,id:Int,helper: Helper): Step(pose,id,helper){
     }
 
     private suspend fun breath(){
-        for(i in 1..1){
-            helper.speaker.mTTS.setSpeechRate(0.3f)
-            speak("Inhale")
-            delay(3000)
-            speak("Exhale")
-            delay(3000)
-            helper.speaker.mTTS.setSpeechRate(1f)
-
+        speak("breath " + breath_times.toString() + " times")
+        for(i in 1 .. breath_times){
+            makeBreathVoice()
         }
 
     }

@@ -61,4 +61,9 @@ abstract class Step (pose:String, id:Int, helper: Helper): CoroutineScope {
         var speaker = helper.speaker
         speaker.speak(message)
     }
+
+    protected fun makeBreathVoice(){
+        var speaker = helper.speaker
+        speaker.breath()
+    }
 }

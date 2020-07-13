@@ -3,6 +3,8 @@ package com.example.yogacomponentdemo.SpeakerHelper
 import android.content.Context
 import android.speech.tts.TextToSpeech
 import android.speech.tts.Voice
+import android.util.Log
+import com.gymandroid.R
 import java.util.*
 
 
@@ -29,7 +31,12 @@ class SpeakerHelper(context: Context) {
             }
         }
     }
-
+    fun breath(){
+        Log.w("breath","start breath")
+        mTTS.addEarcon("[breath]",context.packageName, R.raw.breath)
+        var result = mTTS.playEarcon("[breath]", TextToSpeech.QUEUE_ADD,null)
+        Log.w("breath",result.toString())
+    }
     fun stop(){
         if (mTTS.isSpeaking()){
             mTTS.stop()
