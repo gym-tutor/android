@@ -29,7 +29,7 @@ class ExercisingActivity : AppCompatActivity() {
 
         videoView.setVideoURI(
             // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
+            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tree)
         )
 
         // hide controls
