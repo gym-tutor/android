@@ -8,8 +8,10 @@ import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import com.gymandroid.MainActivity
 import com.gymandroid.R
 
@@ -109,8 +111,9 @@ class excerciseListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
+//            holder.idView.text = item.id
             holder.contentView.text = item.content
+            holder.imgView.setImageResource(item.img)
 
             with(holder.itemView) {
                 tag = item
@@ -123,8 +126,9 @@ class excerciseListActivity : AppCompatActivity() {
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
+//            val idView: TextView = view.id_text
             val contentView: TextView = view.content
+            val imgView: ImageView = view.findViewById(R.id.image)
         }
     }
 }

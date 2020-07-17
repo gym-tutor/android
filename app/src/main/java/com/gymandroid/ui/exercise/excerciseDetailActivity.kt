@@ -95,9 +95,9 @@ class excerciseDetailActivity : AppCompatActivity() {
 //            putExtra(excerciseDetailFragment.ARG_ITEM_ID,intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1)
 //        })
 
-
-        val intent = Intent(this, YogaActivity::class.java)
-        intent.putExtra("POSE_ID",pose_id)
-        startActivity(intent)
+        startActivity(Intent(this, gyroscope::class.java))
+//        val intent = Intent(this, YogaActivity::class.java)
+//        intent.putExtra("POSE_ID",pose_id)
+//        startActivity(intent)
     }
 }

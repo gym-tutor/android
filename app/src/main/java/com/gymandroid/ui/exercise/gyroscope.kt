@@ -36,20 +36,20 @@ class gyroscope : AppCompatActivity() {
     var sensor: Sensor? = null
     lateinit var helper: Helper
 
-//    private val TAG = "AndroidCameraApi"
-//    private var textureView: TextureView? = null
-//    private var cameraId: String? = null
-//    protected var cameraDevice: CameraDevice? = null
-//    protected var cameraCaptureSessions: CameraCaptureSession? = null
-//    protected var captureRequest: CaptureRequest? = null
-//    protected var captureRequestBuilder: CaptureRequest.Builder? = null
-//    private var imageDimension: Size? = null
-//    private val imageReader: ImageReader? = null
-//    private val file: File? = null
-//    private val REQUEST_CAMERA_PERMISSION = 200
-//    private val mFlashSupported = false
-//    private val mBackgroundHandler: Handler? = null
-//    private val mBackgroundThread: HandlerThread? = null
+    private val TAG = "AndroidCameraApi"
+    private var textureView: TextureView? = null
+    private var cameraId: String? = null
+    protected var cameraDevice: CameraDevice? = null
+    protected var cameraCaptureSessions: CameraCaptureSession? = null
+    protected var captureRequest: CaptureRequest? = null
+    protected var captureRequestBuilder: CaptureRequest.Builder? = null
+    private var imageDimension: Size? = null
+    private val imageReader: ImageReader? = null
+    private val file: File? = null
+    private val REQUEST_CAMERA_PERMISSION = 200
+    private val mFlashSupported = false
+    private val mBackgroundHandler: Handler? = null
+    private val mBackgroundThread: HandlerThread? = null
 
 
 
@@ -60,20 +60,20 @@ class gyroscope : AppCompatActivity() {
         // gyroscope parts start
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
-        helper = Helper.getInstance(this)
-        if (!helper.camera.allPermissionsGranted()){
-            ActivityCompat.requestPermissions(this,helper.camera.getPermissions(),
-                helper.camera.getPermissionsCode())
-            Log.e("Main","Cammera not granted")
-
-        }
+//        helper = Helper.getInstance(this)
+//        if (!helper.camera.allPermissionsGranted()){
+//            ActivityCompat.requestPermissions(this,helper.camera.getPermissions(),
+//                helper.camera.getPermissionsCode())
+//            Log.e("Main","Cammera not granted")
+//
+//        }
 
         // gyroscope parts end
 
         // camera preview
-//        textureView = findViewById<View>(R.id.camera) as TextureView
-//        assert(textureView != null)
-//        textureView!!.surfaceTextureListener = textureListener
+        textureView = findViewById<View>(R.id.camera) as TextureView
+        assert(textureView != null)
+        textureView!!.surfaceTextureListener = textureListener
 
         // camera preview
         start_exercising_btn.setOnClickListener {
@@ -114,160 +114,159 @@ class gyroscope : AppCompatActivity() {
 
 //                start_exercising_btn.isClickable = false
             }
-//            is_pos?.text = "Y : " + y.toInt() + " rad/s"
         }
     }
 
-//    var textureListener: TextureView.SurfaceTextureListener = object :
-//        TextureView.SurfaceTextureListener {
-//        override fun onSurfaceTextureAvailable(
-//            surface: SurfaceTexture,
-//            width: Int,
-//            height: Int
-//        ) {
-//            //open your camera here
-//            openCamera()
-//        }
-//
-//        override fun onSurfaceTextureSizeChanged(
-//            surface: SurfaceTexture,
-//            width: Int,
-//            height: Int
-//        ) {
-//            // Transform you image captured size according to the surface width and height
-//        }
-//
-//        override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
-//            return false
-//        }
-//
-//        override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
-//    }
-//    private val stateCallback: CameraDevice.StateCallback = object : CameraDevice.StateCallback() {
-//        override fun onOpened(camera: CameraDevice) {
-//            //This is called when the camera is open
-//            Log.e(TAG, "onOpened")
-//            cameraDevice = camera
-//            createCameraPreview()
-//        }
-//
-//        override fun onDisconnected(camera: CameraDevice) {
-//            cameraDevice!!.close()
-//        }
-//
-//        override fun onError(camera: CameraDevice, error: Int) {
-//            cameraDevice!!.close()
-//            cameraDevice = null
-//        }
-//    }
-//
-//    protected fun createCameraPreview() {
-//        try {
-//            val texture = textureView!!.surfaceTexture!!
-//            texture.setDefaultBufferSize(imageDimension!!.width, imageDimension!!.height)
-//            val surface = Surface(texture)
-//            captureRequestBuilder =
-//                cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-//            captureRequestBuilder!!.addTarget(surface)
-//            cameraDevice!!.createCaptureSession(
-//                Arrays.asList(surface),
-//                object : CameraCaptureSession.StateCallback() {
-//                    override fun onConfigured(cameraCaptureSession: CameraCaptureSession) {
-//                        //The camera is already closed
-//                        if (null == cameraDevice) {
-//                            return
-//                        }
-//                        // When the session is ready, we start displaying the preview.
-//                        cameraCaptureSessions = cameraCaptureSession
-//                        updatePreview()
-//                    }
-//
-//                    override fun onConfigureFailed(cameraCaptureSession: CameraCaptureSession) {
-//                        Toast.makeText(
-//                            this@gyroscope,
-//                            "Configuration change",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                },
-//                null
-//            )
-//        } catch (e: CameraAccessException) {
-//            e.printStackTrace()
-//        }
-//    }
-//
-//    private fun openCamera() {
-//        val manager =
-//            getSystemService(Context.CAMERA_SERVICE) as CameraManager
-//        Log.e(TAG, "is camera open")
-//
-//        lateinit var cameraId : String
-//        try {
-//            cameraId = manager.cameraIdList[1]
-//            val characteristics = manager.getCameraCharacteristics(cameraId)
-//            val map =
-//                characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)!!
-//            imageDimension = map.getOutputSizes(SurfaceTexture::class.java)[0]
-//            // Add permission for camera and let user grant the permission
-//            if (ActivityCompat.checkSelfPermission(
-//                    this,
-//                    Manifest.permission.CAMERA
-//                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                    this,
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                ) != PackageManager.PERMISSION_GRANTED
-//            ) {
-//                ActivityCompat.requestPermissions(
-//                    this@gyroscope,
-//                    arrayOf(
-//                        Manifest.permission.CAMERA,
-//                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                    ),
-//                    REQUEST_CAMERA_PERMISSION
-//                )
-//                return
-//            }
-//            manager.openCamera(cameraId, stateCallback, null)
-//        } catch (e: CameraAccessException) {
-//            e.printStackTrace()
-//        }
-//        Log.e(TAG, "openCamera X")
-//    }
-//
-//    protected fun updatePreview() {
-//        if (null == cameraDevice) {
-//            Log.e(TAG, "updatePreview error, return")
-//        }
-//        captureRequestBuilder!!.set(
-//            CaptureRequest.CONTROL_MODE,
-//            CameraMetadata.CONTROL_MODE_AUTO
-//        )
-//        try {
-//            cameraCaptureSessions!!.setRepeatingRequest(
-//                captureRequestBuilder!!.build(),
-//                null,
-//                mBackgroundHandler
-//            )
-//        } catch (e: CameraAccessException) {
-//            e.printStackTrace()
-//        }
-//    }
+    var textureListener: TextureView.SurfaceTextureListener = object :
+        TextureView.SurfaceTextureListener {
+        override fun onSurfaceTextureAvailable(
+            surface: SurfaceTexture,
+            width: Int,
+            height: Int
+        ) {
+            //open your camera here
+            openCamera()
+        }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (grantResults.isNotEmpty() && grantResults[0] ==
-            PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Permission Accepted", Toast.LENGTH_SHORT).show()
+        override fun onSurfaceTextureSizeChanged(
+            surface: SurfaceTexture,
+            width: Int,
+            height: Int
+        ) {
+            // Transform you image captured size according to the surface width and height
         }
-        else {
-            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+
+        override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+            return false
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
     }
+    private val stateCallback: CameraDevice.StateCallback = object : CameraDevice.StateCallback() {
+        override fun onOpened(camera: CameraDevice) {
+            //This is called when the camera is open
+            Log.e(TAG, "onOpened")
+            cameraDevice = camera
+            createCameraPreview()
+        }
+
+        override fun onDisconnected(camera: CameraDevice) {
+            cameraDevice!!.close()
+        }
+
+        override fun onError(camera: CameraDevice, error: Int) {
+            cameraDevice!!.close()
+            cameraDevice = null
+        }
+    }
+
+    protected fun createCameraPreview() {
+        try {
+            val texture = textureView!!.surfaceTexture!!
+            texture.setDefaultBufferSize(imageDimension!!.width, imageDimension!!.height)
+            val surface = Surface(texture)
+            captureRequestBuilder =
+                cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+            captureRequestBuilder!!.addTarget(surface)
+            cameraDevice!!.createCaptureSession(
+                Arrays.asList(surface),
+                object : CameraCaptureSession.StateCallback() {
+                    override fun onConfigured(cameraCaptureSession: CameraCaptureSession) {
+                        //The camera is already closed
+                        if (null == cameraDevice) {
+                            return
+                        }
+                        // When the session is ready, we start displaying the preview.
+                        cameraCaptureSessions = cameraCaptureSession
+                        updatePreview()
+                    }
+
+                    override fun onConfigureFailed(cameraCaptureSession: CameraCaptureSession) {
+                        Toast.makeText(
+                            this@gyroscope,
+                            "Configuration change",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                },
+                null
+            )
+        } catch (e: CameraAccessException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun openCamera() {
+        val manager =
+            getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        Log.e(TAG, "is camera open")
+
+        lateinit var cameraId : String
+        try {
+            cameraId = manager.cameraIdList[1]
+            val characteristics = manager.getCameraCharacteristics(cameraId)
+            val map =
+                characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)!!
+            imageDimension = map.getOutputSizes(SurfaceTexture::class.java)[0]
+            // Add permission for camera and let user grant the permission
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this@gyroscope,
+                    arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ),
+                    REQUEST_CAMERA_PERMISSION
+                )
+                return
+            }
+            manager.openCamera(cameraId, stateCallback, null)
+        } catch (e: CameraAccessException) {
+            e.printStackTrace()
+        }
+        Log.e(TAG, "openCamera X")
+    }
+
+    protected fun updatePreview() {
+        if (null == cameraDevice) {
+            Log.e(TAG, "updatePreview error, return")
+        }
+        captureRequestBuilder!!.set(
+            CaptureRequest.CONTROL_MODE,
+            CameraMetadata.CONTROL_MODE_AUTO
+        )
+        try {
+            cameraCaptureSessions!!.setRepeatingRequest(
+                captureRequestBuilder!!.build(),
+                null,
+                mBackgroundHandler
+            )
+        } catch (e: CameraAccessException) {
+            e.printStackTrace()
+        }
+    }
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        if (grantResults.isNotEmpty() && grantResults[0] ==
+//            PackageManager.PERMISSION_GRANTED) {
+//            Toast.makeText(this, "Permission Accepted", Toast.LENGTH_SHORT).show()
+//        }
+//        else {
+//            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+//        }
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//    }
 
 
 }
