@@ -37,8 +37,7 @@ class excerciseListActivity : AppCompatActivity() {
     private var twoPane: Boolean = false
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this@excerciseListActivity, MainActivity::class.java))
+        navigateUpTo(Intent(this, MainActivity::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
