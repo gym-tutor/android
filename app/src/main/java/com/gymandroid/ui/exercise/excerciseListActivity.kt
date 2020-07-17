@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import com.gymandroid.MainActivity
 import com.gymandroid.R
 
 import com.gymandroid.ui.exercise.dummy.DummyContent
@@ -32,17 +34,25 @@ class excerciseListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@excerciseListActivity, MainActivity::class.java))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excercise_list)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = title
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+//        supportActionBar?.setDisplayShowHomeEnabled(true);
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
 
         if (excercise_detail_container != null) {
             // The detail container view will be present only in the
@@ -90,6 +100,7 @@ class excerciseListActivity : AppCompatActivity() {
             }
         }
 
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.excercise_list_content, parent, false)
@@ -106,6 +117,8 @@ class excerciseListActivity : AppCompatActivity() {
                 setOnClickListener(onClickListener)
             }
         }
+
+
 
         override fun getItemCount() = values.size
 

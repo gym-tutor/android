@@ -32,7 +32,7 @@ class excerciseDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
+//                activity?.toolbar_layout?.title = item?.content
             }
         }
     }
@@ -42,10 +42,12 @@ class excerciseDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.excercise_detail, container, false)
+//        val rootView2 = inflater.inflate(R.layout.excercise_caution, container, false)
 
         // Show the dummy content as text in a TextView.
         item?.let {
-            rootView.excercise_detail.text = it.details
+            rootView.excercise_detail.text = null
+//            rootView2.excercise_caution.text = item?.caution
         }
 
         return rootView
