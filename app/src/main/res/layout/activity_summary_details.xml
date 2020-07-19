@@ -28,6 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="5sp"
             android:orientation="vertical">
 
             <TextView
@@ -51,7 +52,7 @@
                 android:id="@+id/piechart"
                 android:paddingHorizontal="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="400dp" />
+                android:layout_height="250dp" />
 
             <TextView
                 android:id="@+id/summary_details_analysis"
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"
-                android:textSize="32sp"
+                android:textSize="24sp"
                 android:textAlignment="center" />
 
         </LinearLayout>
