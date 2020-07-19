@@ -5,8 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/backgroundcolor">
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/account_bar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -17,143 +18,199 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="Account" />
-    <LinearLayout android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:background="?attr/cardbackgroundcolor"
-            >
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="center_vertical"
-                android:textSize="19dp"
-                android:text="Account Number"/>
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="right|center"
-                android:textSize="19dp"
-                android:text="123456"/>
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="?attr/cardbackgroundcolor"
-            android:layout_weight="1">
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
+                android:layout_weight="9"
                 android:gravity="center_vertical"
-                android:textSize="19dp"
-                android:text="Name"/>
-            <TextView android:layout_width="0dp"
+                android:text="Account Number"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="right|center"
+                android:text="123456"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="?attr/cardbackgroundcolor"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                android:text="Name"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+
+            <TextView
                 android:id="@+id/accounr_number"
-                android:layout_weight="9"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
+                android:layout_weight="9"
                 android:gravity="right|center"
-                android:textSize="19dp"
-                android:text="Team NULL"/>
+                android:text="Team NULL"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
         </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="?attr/cardbackgroundcolor">
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="center_vertical"
-                android:textSize="19dp"
-                android:text="Gender"/>
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="right|center"
-                android:textSize="19dp"
-                android:text="Male"/>
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:background="?attr/cardbackgroundcolor">
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="center_vertical"
-                android:textSize="19dp"
-                android:text="Age"/>
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="right|center"
-                android:textSize="19dp"
-                android:text="20"/>
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:background="?attr/cardbackgroundcolor">
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="center_vertical"
-                android:textSize="19dp"
-                android:text="Height"/>
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="right|center"
-                android:textSize="19dp"
-                android:text="185"/>
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:background="?attr/cardbackgroundcolor">
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="center_vertical"
-                android:textSize="19dp"
-                android:text="Weight"/>
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
-                android:layout_height="match_parent"
-                android:textColor="?attr/textcolor"
-                android:gravity="right|center"
-                android:textSize="19dp"
-                android:text="70"/>
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_weight="50"
-            android:background="?attr/backgroundcolor">
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-            android:orientation="horizontal"
             android:background="?attr/cardbackgroundcolor"
-            android:layout_weight="1"
-            android:id="@+id/logout">
-            <TextView android:layout_width="0dp"
-                android:layout_weight="9"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                android:text="Gender"
                 android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="right|center"
+                android:text="Male"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="?attr/cardbackgroundcolor"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                android:text="Age"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="right|center"
+                android:text="20"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="?attr/cardbackgroundcolor"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                android:text="Height"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="right|center"
+                android:text="185"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="?attr/cardbackgroundcolor"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                android:text="Weight"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:gravity="right|center"
+                android:text="70"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="50"
+            android:background="?attr/backgroundcolor"
+            android:orientation="horizontal"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="?attr/cardbackgroundcolor"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
                 android:gravity="center"
-                android:textSize="19dp"
-                android:text="Logout"/>
+                android:text="Logout"
+                android:textColor="?attr/textcolor"
+                android:textSize="19dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

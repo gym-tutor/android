@@ -5,8 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/backgroundcolor">
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/account_bar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -17,44 +18,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="Notification" />
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-        android:orientation="horizontal"
+
+    <LinearLayout
+        android:id="@+id/silent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="?attr/cardbackgroundcolor"
-        android:id="@+id/silent">
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
         <Switch
             android:id="@+id/change_notification"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:textSize="19dp"
+            android:text="Silent Mode"
             android:textColor="?attr/textcolor"
-            android:text="Silent Mode" />
+            android:textSize="19dp" />
     </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
         android:orientation="horizontal"
-        android:background="?attr/cardbackgroundcolor">
+        android:paddingHorizontal="10dp">
+
         <Switch
             android:id="@+id/message_notifications"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:textSize="19dp"
+            android:text="Message notification"
             android:textColor="?attr/textcolor"
-            android:text="Message notification" />
+            android:textSize="19dp" />
     </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
         android:orientation="horizontal"
-        android:background="?attr/cardbackgroundcolor">
+        android:paddingHorizontal="10dp">
+
         <Switch
             android:id="@+id/voice_notificitation"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:textSize="19dp"
+            android:text="Voice notification"
             android:textColor="?attr/textcolor"
-            android:text="Voice notification" />
+            android:textSize="19dp" />
     </LinearLayout>
 
 </LinearLayout>

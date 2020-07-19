@@ -5,8 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/backgroundcolor">
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/settings_bar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -17,106 +18,172 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="Settings" />
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-        android:orientation="horizontal"
+
+    <LinearLayout
+        android:id="@+id/account"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="?attr/cardbackgroundcolor"
-        android:id="@+id/account">
-        <TextView android:layout_width="0dp"
-            android:layout_weight="9"
-            android:layout_height="match_parent"
-            android:textColor="?attr/textcolor"
-            android:gravity="center_vertical"
-            android:textSize="19dp"
-            android:text="Account Security"/>
-        <ImageView android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/right_arraow_gray"/>
-    </LinearLayout>
-    <TextView android:layout_width="match_parent" android:layout_height="10dp"/>
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-    android:orientation="horizontal" android:background="?attr/cardbackgroundcolor" android:id="@+id/message_notifications">
-    <TextView android:layout_width="0dp"
-        android:layout_weight="9"
-        android:layout_height="match_parent"
-        android:textColor="?attr/textcolor"
-        android:gravity="center_vertical"
-        android:textSize="19dp"
-        android:text="Message Notifications"/>
-    <ImageView android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:src="@drawable/right_arraow_gray"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-        android:orientation="horizontal" android:background="?attr/cardbackgroundcolor" android:id="@+id/priavacy">
-        <TextView android:layout_width="0dp"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="9"
-            android:layout_height="match_parent"
-            android:textColor="?attr/textcolor"
             android:gravity="center_vertical"
-            android:textSize="19dp"
-            android:text="Privacy"/>
-        <ImageView android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/right_arraow_gray"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-    android:orientation="horizontal" android:background="?attr/cardbackgroundcolor" android:id="@+id/general">
-    <TextView android:layout_width="0dp"
-        android:layout_weight="9"
-        android:layout_height="match_parent"
-        android:textColor="?attr/textcolor"
-        android:gravity="center_vertical"
-        android:textSize="19dp"
-        android:text="General"/>
-    <ImageView android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:src="@drawable/right_arraow_gray"/>
-    </LinearLayout>
-    <TextView android:layout_width="match_parent" android:layout_height="10dp"/>
+            android:text="Account Security"
+            android:textColor="?attr/textcolor"
+            android:textSize="19dp" />
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-        android:orientation="horizontal" android:background="?attr/cardbackgroundcolor" android:id="@+id/contact_us">
-        <TextView android:layout_width="0dp"
-            android:layout_weight="9"
-            android:layout_height="match_parent"
-            android:textColor="?attr/textcolor"
-            android:gravity="center_vertical"
-            android:textSize="19dp"
-            android:text="Contact Us"/>
-        <ImageView android:layout_width="0dp"
+        <ImageView
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/right_arraow_gray"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
-        android:orientation="horizontal" android:background="?attr/cardbackgroundcolor" android:id="@+id/about">
-        <TextView android:layout_width="0dp"
-            android:layout_weight="9"
-            android:layout_height="match_parent"
-            android:textColor="?attr/textcolor"
-            android:gravity="center_vertical"
-            android:textSize="19dp"
-            android:text="About Us"/>
-        <ImageView android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/right_arraow_gray"/>
+            android:src="@drawable/right_arraow_gray" />
     </LinearLayout>
 
-    <TextView android:layout_width="match_parent" android:layout_height="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:id="@+id/message_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="Message Notifications"
+            android:textColor="?attr/textcolor"
+            android:textSize="19dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/right_arraow_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/priavacy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="Privacy"
+            android:textColor="?attr/textcolor"
+            android:textSize="19dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/right_arraow_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/general"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="General"
+            android:textColor="?attr/textcolor"
+            android:textSize="19dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/right_arraow_gray" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:id="@+id/contact_us"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="Contact Us"
+            android:textColor="?attr/textcolor"
+            android:textSize="19dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/right_arraow_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/cardbackgroundcolor"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="About Us"
+            android:textColor="?attr/textcolor"
+            android:textSize="19dp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/right_arraow_gray" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
     <Switch
         android:id="@+id/change_theme"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:textSize="19dp"
+        android:paddingHorizontal="10dp"
+        android:text="Change color theme"
         android:textColor="?attr/textcolor"
-        android:text="Change color theme" />
+        android:textSize="19dp" />
 
 
 </LinearLayout>
