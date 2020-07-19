@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 
-class Record(private val recordData: ExerciseRecord): Serializable {
+class Record(private val recordData: ExerciseRecord) : Serializable {
     val type: String get() = recordData.type
     val analysis: String get() = recordData.analysis
     val correctRate: Int get() = recordData.correctRate.roundToInt()

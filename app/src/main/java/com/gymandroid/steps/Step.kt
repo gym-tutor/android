@@ -7,7 +7,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlin.coroutines.CoroutineContext
 
-abstract class Step (pose:String, id:Int, helper: Helper): CoroutineScope {
+abstract class Step(pose: String, id: Int, helper: Helper) : CoroutineScope {
     protected var pose = pose
     var curr_id = id
         protected set
@@ -21,48 +21,54 @@ abstract class Step (pose:String, id:Int, helper: Helper): CoroutineScope {
         get() = SupervisorJob() + Dispatchers.Main
 
 
-    fun next(): Step?{
+    fun next(): Step? {
         return this.next_step
     }
-    open fun isStartStep():Boolean{
+
+    open fun isStartStep(): Boolean {
         return false
     }
 
-    open fun isBreathStep():Boolean{
+    open fun isBreathStep(): Boolean {
         return false
     }
 
-    open fun isPoseStep():Boolean {
+    open fun isPoseStep(): Boolean {
         return false
     }
-    open fun isEvalStep():Boolean{
+
+    open fun isEvalStep(): Boolean {
         return false
     }
-    open fun isEndStep():Boolean{
+
+    open fun isEndStep(): Boolean {
         return false
     }
-    open fun isRelaxStep():Boolean{
+
+    open fun isRelaxStep(): Boolean {
         return false
     }
-    fun takePhoto():String{
+
+    fun takePhoto(): String {
         var camera = helper.camera
         camera.takePhoto()
-        while(camera.getImage() == null)continue
+        while (camera.getImage() == null) continue
         return camera.getImage()!!
     }
+
     //Current step repeating
-    fun setNextStep(step: Step){
+    fun setNextStep(step: Step) {
         this.next_step = step
     }
 
     abstract suspend fun action();
 
-    protected fun speak(message:String){
+    protected fun speak(message: String) {
         var speaker = helper.speaker
         speaker.speak(message)
     }
 
-    protected fun makeBreathVoice(){
+    protected fun makeBreathVoice() {
         var speaker = helper.speaker
         speaker.breath()
     }

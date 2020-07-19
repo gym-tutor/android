@@ -61,7 +61,7 @@ class ExercisingActivity : AppCompatActivity() {
         if (countdownNumber < 0) {
             infoView.text = "Exercising"
         } else if (countdownNumber == 0) {
-            infoView.text= "Ready..."
+            infoView.text = "Ready..."
         } else {
             val infoText = countdownNumber.toString()
             infoView.text = infoText

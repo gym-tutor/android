@@ -6,9 +6,9 @@ import kotlinx.coroutines.delay
 import org.json.JSONArray
 import org.json.JSONObject
 
-class StartStep(pose:String,id:Int,helper: Helper): Step(pose,id,helper){
+class StartStep(pose: String, id: Int, helper: Helper) : Step(pose, id, helper) {
 
-    override suspend fun action(){
+    override suspend fun action() {
         val jsonObj = JsonObject()
         jsonObj.addProperty("yoga_name", pose)
 
@@ -43,7 +43,8 @@ class StartStep(pose:String,id:Int,helper: Helper): Step(pose,id,helper){
         this.speak("Let's Exercise")
         delay(1000)
     }
-    override fun isStartStep():Boolean {
+
+    override fun isStartStep(): Boolean {
         return true
     }
 }

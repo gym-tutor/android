@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_setting_account.*
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.DarkTheme);
         } else {
             setTheme(R.style.AppTheme);
@@ -29,56 +29,55 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val colortheme: Switch = findViewById(R.id.change_theme) as Switch
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             colortheme.isChecked = true;
         }
         colortheme.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked){
+            if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }
-            else {
+            } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
 
         val account: LinearLayout = findViewById(R.id.account)
-        account.setOnClickListener{
+        account.setOnClickListener {
             val intent = Intent(this, SettingsAccount::class.java)
-            intent.putExtra("Page",0)
+            intent.putExtra("Page", 0)
             startActivity(intent)
         }
 
         val notification: LinearLayout = findViewById(R.id.message_notifications)
-        notification.setOnClickListener{
+        notification.setOnClickListener {
             val intent = Intent(this, SettingsAccount::class.java)
-            intent.putExtra("Page",1)
+            intent.putExtra("Page", 1)
             startActivity(intent)
         }
 
         val priavacy: LinearLayout = findViewById(R.id.priavacy)
-        priavacy.setOnClickListener{
+        priavacy.setOnClickListener {
             val intent = Intent(this, SettingsAccount::class.java)
-            intent.putExtra("Page",2)
+            intent.putExtra("Page", 2)
             startActivity(intent)
         }
 
         val general: LinearLayout = findViewById(R.id.general)
-        general.setOnClickListener{
+        general.setOnClickListener {
             val intent = Intent(this, SettingsAccount::class.java)
-            intent.putExtra("Page",3)
+            intent.putExtra("Page", 3)
             startActivity(intent)
         }
 
         val contactus: LinearLayout = findViewById(R.id.contact_us)
-        contactus.setOnClickListener{
+        contactus.setOnClickListener {
             val intent = Intent(this, SettingsAccount::class.java)
-            intent.putExtra("Page",4)
+            intent.putExtra("Page", 4)
             startActivity(intent)
         }
         val aboutus: LinearLayout = findViewById(R.id.about)
-        aboutus.setOnClickListener{
+        aboutus.setOnClickListener {
             val intent = Intent(this, SettingsAccount::class.java)
-            intent.putExtra("Page",5)
+            intent.putExtra("Page", 5)
             startActivity(intent)
         }
     }

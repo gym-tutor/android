@@ -5,8 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/backgroundcolor">
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/account_bar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -17,15 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="Contact Us" />
-    <TextView android:layout_width="match_parent" android:layout_height="0dp"
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:textColor="@android:color/background_light"
         android:background="@android:color/black"
-        android:textSize="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:text="Name: NULL\nContact number: 0406123456\nEmail: NULL@gmail.com\n
-Address: UNSW CSE Kensington Sydney Australia"></TextView>
+Address: UNSW CSE Kensington Sydney Australia"
+        android:textColor="@android:color/background_light"
+        android:textSize="25dp"></TextView>
 
 
 </LinearLayout>

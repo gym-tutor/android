@@ -121,11 +121,10 @@ class excerciseListActivity : AppCompatActivity() {
         }
 
 
-
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//            val idView: TextView = view.id_text
+            //            val idView: TextView = view.id_text
             val contentView: TextView = view.content
             val imgView: ImageView = view.findViewById(R.id.image)
         }

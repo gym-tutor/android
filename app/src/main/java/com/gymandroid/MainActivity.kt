@@ -92,7 +92,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
 //    override fun onResume() {
 //        super.onResume()
 //        sensorManager!!.registerListener(gyroListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)

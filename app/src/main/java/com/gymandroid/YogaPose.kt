@@ -7,36 +7,36 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates.observable
 
-class YogaPose(yogaName:String, helper: Helper):CoroutineScope {
+class YogaPose(yogaName: String, helper: Helper) : CoroutineScope {
     var helper = helper
     var yogaName = yogaName
     var start_step: Step = StartStep(yogaName, 0, helper)
-    var curr_step : Step by observable(start_step){ _, oldValue, newValue ->
+    var curr_step: Step by observable(start_step) { _, oldValue, newValue ->
         onStateChange?.invoke(newValue)
     }
-    var state:Int by observable(0){_, oldValue, newValue ->
+    var state: Int by observable(0) { _, oldValue, newValue ->
         if (newValue == 4) {
             onEndState?.invoke()
         }
     }
-    var onStateChange:((newStep: Step)->Unit)?=null
+    var onStateChange: ((newStep: Step) -> Unit)? = null
 
-    var onEndState:(() -> Unit)?=null
+    var onEndState: (() -> Unit)? = null
 
     lateinit var job: Job
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + Dispatchers.Main
 
-    fun start(){
+    fun start() {
 
-        if(state==0 || state == 2){
+        if (state == 0 || state == 2) {
             state = 1
             run()
         }
     }
 
-    fun run(){
+    fun run() {
 
         job = launch(Dispatchers.Unconfined) {
 
@@ -45,11 +45,10 @@ class YogaPose(yogaName:String, helper: Helper):CoroutineScope {
                 if (!curr_step.isEndStep()) {
                     state = 0
                     curr_step.action()
-                    if(curr_step.repeat) {
+                    if (curr_step.repeat) {
                         curr_step.repeat = false
                         curr_step = curr_step
-                    }
-                    else{
+                    } else {
                         curr_step = curr_step.next()!!
                     }
 
@@ -61,17 +60,19 @@ class YogaPose(yogaName:String, helper: Helper):CoroutineScope {
         }
     }
 
-    fun pause(){
-        if(state ==1){
+    fun pause() {
+        if (state == 1) {
             state = 2
             job.cancel()
         }
     }
-    fun resume(){
+
+    fun resume() {
         start()
 
     }
-    fun restart(){
+
+    fun restart() {
         curr_step = start_step
     }
 

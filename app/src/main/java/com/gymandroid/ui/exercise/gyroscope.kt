@@ -52,7 +52,6 @@ class gyroscope : AppCompatActivity() {
     private val mBackgroundThread: HandlerThread? = null
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gyroscope)
@@ -92,6 +91,7 @@ class gyroscope : AppCompatActivity() {
         super.onStop()
         sensorManager!!.unregisterListener(gyroListener)
     }
+
     private var gyroListener: SensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor, acc: Int) {}
 
@@ -100,7 +100,7 @@ class gyroscope : AppCompatActivity() {
             val y = event.values[1]
             val z = event.values[2]
 
-            if (-85< y.toInt() && y.toInt() < -45) {
+            if (-85 < y.toInt() && y.toInt() < -45) {
                 textView5?.text = "Position Good !"
                 progressBar.setProgress(100, true)
 //                start_exercising_btn.isClickable = true
@@ -201,7 +201,7 @@ class gyroscope : AppCompatActivity() {
             getSystemService(Context.CAMERA_SERVICE) as CameraManager
         Log.e(TAG, "is camera open")
 
-        lateinit var cameraId : String
+        lateinit var cameraId: String
         try {
             cameraId = manager.cameraIdList[1]
             val characteristics = manager.getCameraCharacteristics(cameraId)

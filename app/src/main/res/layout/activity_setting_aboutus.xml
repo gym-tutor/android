@@ -5,8 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/backgroundcolor">
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/account_bar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -17,33 +18,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_chevron_left_white_18dp"
         app:title="About Us" />
-    <TextView android:layout_width="match_parent" android:layout_height="0dp"
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
+        android:background="@android:color/black"
         android:gravity="center_horizontal"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/black"
-        android:textSize="30dp"
-        android:text="UNSW\nCSE\nDataDynamic\nNULL"></TextView>
-    <TextView android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:id="@+id/silent"
+        android:text="UNSW\nCSE\nDataDynamic\nNULL"
         android:textColor="@android:color/background_light"
+        android:textSize="30dp"></TextView>
+
+    <TextView
+        android:id="@+id/silent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@android:color/black"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:text="We are NULL group in UNSW VIP Data Dynamic project, this APP is built an
-efficient, intelligent and user friendly fittness APP for mutiple users. And define the next generation of Fitnees"></TextView>
-    <TextView android:layout_width="match_parent"
+efficient, intelligent and user friendly fittness APP for mutiple users. And define the next generation of Fitnees"
+        android:textColor="@android:color/background_light"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
-        android:textSize="15dp"
+        android:gravity="center"
         android:text="RenHao Huang        Lucas Wang\nHaodong Lu           Haowei Lou\nBofei Wang"
         android:textColor="@android:color/background_light"
-        android:gravity="center"></TextView>
-    <ImageView android:layout_height="0dp"
-        android:layout_weight="2"
+        android:textSize="15dp"></TextView>
+
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:background="@android:color/black"
         android:src="@drawable/logo">
 

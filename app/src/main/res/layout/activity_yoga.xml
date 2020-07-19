@@ -5,22 +5,23 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-<!--    <Button-->
-<!--        android:id="@+id/pause_btn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text = "Pause"/>-->
-<!--    <Button-->
-<!--        android:id="@+id/continue_btn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text = "continue"/>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/pause_btn"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text = "Pause"/>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/continue_btn"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text = "continue"/>-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height = "wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="#000000"
-        android:gravity="center"
-        android:layout_weight="1">
+        android:gravity="center">
+
         <VideoView
             android:id="@+id/videoView"
             android:layout_width="match_parent"

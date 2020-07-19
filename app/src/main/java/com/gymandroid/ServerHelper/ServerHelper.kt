@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 class ServerHelper {
-    var result:JSONObject? = null
+    var result: JSONObject? = null
 
     interface APIService {
         @GET("/users/{user}")
@@ -36,11 +36,11 @@ class ServerHelper {
         var service = retrofit.create(APIService::class.java)
     }
 
-    fun getEvaluateMessage(jsonObj:JsonObject){
-        var msg:String? = ""
+    fun getEvaluateMessage(jsonObj: JsonObject) {
+        var msg: String? = ""
         service.getVectors(jsonObj).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("service post",t.message)
+                Log.e("service post", t.message)
             }
 
             override fun onResponse(
@@ -49,18 +49,21 @@ class ServerHelper {
             ) {
                 msg = response.body()?.string()
                 result = JSONObject(msg)
-                Log.e("In getEvaluateMessage","---TTTT :: POST msg from server :: " + result.toString())
+                Log.e(
+                    "In getEvaluateMessage",
+                    "---TTTT :: POST msg from server :: " + result.toString()
+                )
             }
 
         })
-        Log.e("in Post",msg )
+        Log.e("in Post", msg)
     }
 
-    fun getStepMessages(jsonObj:JsonObject){
-        var msg:String? = ""
+    fun getStepMessages(jsonObj: JsonObject) {
+        var msg: String? = ""
         service.GetStepMessages(jsonObj).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("service post",t.message)
+                Log.e("service post", t.message)
             }
 
             override fun onResponse(
@@ -69,19 +72,20 @@ class ServerHelper {
             ) {
                 msg = response.body()?.string()
                 result = JSONObject(msg)
-                Log.e("In getStepMessages","---TTTT :: POST msg from server :: " + result.toString())
+                Log.e(
+                    "In getStepMessages",
+                    "---TTTT :: POST msg from server :: " + result.toString()
+                )
             }
 
         })
 
 
-
-
     }
 
-    fun GET():JSONObject{
-        var msg:String? = ""
-        service.greetUser("HI").enqueue( object:Callback<ResponseBody>{
+    fun GET(): JSONObject {
+        var msg: String? = ""
+        service.greetUser("HI").enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("service get", t.message)
             }

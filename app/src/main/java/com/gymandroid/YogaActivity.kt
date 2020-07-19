@@ -9,7 +9,7 @@ import com.gymandroid.ui.exercise.excerciseDetailFragment
 import kotlinx.android.synthetic.main.activity_yoga.*
 import kotlinx.coroutines.Job
 
-class YogaActivity: AppCompatActivity() {
+class YogaActivity : AppCompatActivity() {
     var job: Job? = null
     lateinit var helper: Helper
     lateinit var yogaPose: YogaPose
@@ -21,12 +21,12 @@ class YogaActivity: AppCompatActivity() {
         helper.start(this)
         helper.speaker.onMessageChange = {
             runOnUiThread {
-                Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         }
 
-        val pose_id = intent.getIntExtra("POSE_ID",0)
-        val pose_name = if(pose_id ==0) "tree" else "cobra"
+        val pose_id = intent.getIntExtra("POSE_ID", 0)
+        val pose_name = if (pose_id == 0) "tree" else "cobra"
         yogaPose = YogaPose(pose_name, helper)
 
 //        pause_btn.setOnClickListener {
@@ -63,9 +63,9 @@ class YogaActivity: AppCompatActivity() {
 
     }
 
-    private fun getVideoList(pose_name:String):ArrayList<Int>{
+    private fun getVideoList(pose_name: String): ArrayList<Int> {
         var videolist = ArrayList<Int>()
-        when(pose_name){
+        when (pose_name) {
             "tree" -> {
                 videolist.add(R.raw.tree_1)
                 videolist.add(R.raw.tree_2)
@@ -83,6 +83,7 @@ class YogaActivity: AppCompatActivity() {
         return videolist
 
     }
+
     override fun onStart() {
 
         super.onStart()

@@ -39,7 +39,7 @@ object DummyContent {
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createDummyItem(i, moves[i-1].toString()))
+            addItem(createDummyItem(i, moves[i - 1].toString()))
         }
 
     }
@@ -50,19 +50,33 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int, name: String): DummyItem {
-        return DummyItem(position.toString(), name, makeDetails(position), uries[position - 1], cautions[position - 1], imgs[position - 1])
+        return DummyItem(
+            position.toString(),
+            name,
+            makeDetails(position),
+            uries[position - 1],
+            cautions[position - 1],
+            imgs[position - 1]
+        )
     }
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()
-        builder.append(details[position-1])
+        builder.append(details[position - 1])
         return builder.toString()
     }
 
     /**
      * A dummy item representing a piece of content.
      */
-    data class DummyItem(val id: String, val content: String, val details: String, val uri: Int, val caution: String, val img: Int) {
+    data class DummyItem(
+        val id: String,
+        val content: String,
+        val details: String,
+        val uri: Int,
+        val caution: String,
+        val img: Int
+    ) {
         override fun toString(): String = content
     }
 }
