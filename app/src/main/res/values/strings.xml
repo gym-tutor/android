@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gym Android</string>
+    <string name="app_name">Gym Tutor</string>
     <string name="title_summary">Summary</string>
     <string name="title_exercise">Exercise</string>
     <string name="summary_card_title">Report</string>
