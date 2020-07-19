@@ -33,8 +33,8 @@ class SummaryDetailsActivity : AppCompatActivity() {
         val pieChart = findViewById<PieChart>(R.id.piechart)
         val correctRateData = ArrayList<PieEntry>()
 
-        correctRateData.add(PieEntry(85f))
-        correctRateData.add(PieEntry(15f))
+        correctRateData.add(PieEntry(correctRate.toFloat()))
+        correctRateData.add(PieEntry(100f - correctRate))
         val dataSet = PieDataSet(correctRateData, null)
 
         pieChart.data = PieData(dataSet)
@@ -44,7 +44,7 @@ class SummaryDetailsActivity : AppCompatActivity() {
             Color.rgb(0xba, 0x16, 0x0c)
         )
 
-        pieChart.centerText = "85% Correct"
+        pieChart.centerText = "${correctRate}% Correct"
         pieChart.setTransparentCircleAlpha(1)
         pieChart.setCenterTextSize(24f)
 
