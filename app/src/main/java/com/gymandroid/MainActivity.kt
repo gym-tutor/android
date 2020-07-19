@@ -74,7 +74,10 @@ class MainActivity : AppCompatActivity() {
 //        )
 //        addRecords(this, ExerciseRecord(1592438400, "Sit-ups", 98.6f, 5.7f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
 //        addRecords(this, ExerciseRecord(1592418400, "Sit-ups", 98.6f, 2.7f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
-//        addRecords(this, ExerciseRecord(1092418400, "Yoga", 98.6f, 1.1f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
+
+//        Examples of using updateOrAddRecord:
+//        addRecords(this, ExerciseRecord(1092418400, "TEST", 0.1f, 1.1f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
+//        updateOrAddRecord(this, ExerciseRecord(1192418400, "TEST", 98.6f, 1.1f, "LOLs. [More analysis...]"))
     }
 
     fun startExercise(view: View) {

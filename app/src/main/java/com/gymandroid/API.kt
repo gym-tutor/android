@@ -19,11 +19,11 @@ private val defaultRecordJSON = "{\"records\": []}"
 * */
 @Serializable
 data class ExerciseRecord(
-    val unixTimestamp: Long,  // timestamp in unix format
+    var unixTimestamp: Long,  // timestamp in unix format
     val type: String,  // type of exercise (e.g. sit-up, push-up)
-    val correctRate: Float,  // rate of correct exercise motion detected during the exercise
-    val hoursSpent: Float,  // hours spent on this exercise
-    val analysis: String  // detailed analysis (e.g. Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...])
+    var correctRate: Float,  // rate of correct exercise motion detected during the exercise
+    var hoursSpent: Float,  // hours spent on this exercise
+    var analysis: String  // detailed analysis (e.g. Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...])
 ) : java.io.Serializable
 
 @Serializable
@@ -65,6 +65,45 @@ fun getRecords(activity: ComponentActivity): ArrayList<ExerciseRecord> {
         sharedPref.getString("records", defaultRecordJSON) ?: defaultRecordJSON
     val records: ExerciseRecords = Json.parse(ExerciseRecords.serializer(), currentRecordsEncoded)
     return records.records
+}
+
+/*
+* If record exists, update the existing record
+* Otherwise, add as a new record
+*
+* Record exists means there exists a record of the same type
+* When performing record update, timestamp is updated to the same as the new record,
+*   correct rate is the average of both,
+*   hours spent are added together,
+*   analysis is overwritten
+* */
+fun updateOrAddRecord(activity: ComponentActivity, record: ExerciseRecord): Boolean {
+    val sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
+    val currentRecordsEncoded =
+        sharedPref.getString("records", defaultRecordJSON) ?: defaultRecordJSON
+    val records: ExerciseRecords = Json.parse(ExerciseRecords.serializer(), currentRecordsEncoded)
+
+    var updated = false
+    for (recordExist in records.records) {
+        if (record.type == recordExist.type) {
+            updated = true
+            recordExist.unixTimestamp = record.unixTimestamp
+            recordExist.correctRate = (record.correctRate + recordExist.correctRate) / 2
+            recordExist.hoursSpent += record.hoursSpent
+            recordExist.analysis = record.analysis
+        }
+    }
+    if (!updated) {
+        records.records.add(record)
+    }
+
+    records.records.sortByDescending { it.unixTimestamp }
+    val modifiedRecordsEncoded = json.stringify(ExerciseRecords.serializer(), records)
+    with(sharedPref.edit()) {
+        putString("records", modifiedRecordsEncoded)
+        commit()
+    }
+    return true
 }
 
 /*
