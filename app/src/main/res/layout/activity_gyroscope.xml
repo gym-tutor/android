@@ -9,10 +9,12 @@
 
     <TextureView
         android:id="@+id/camera"
-        android:layout_width="350dp"
-        android:layout_height="500dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="20dp"
+        app:layout_constraintDimensionRatio="0.75"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.65"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
