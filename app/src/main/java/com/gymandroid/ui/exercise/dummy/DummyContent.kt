@@ -1,19 +1,15 @@
 package com.gymandroid.ui.exercise.dummy
 
 import android.content.Context
-import android.content.res.Resources
-import android.util.Log
-import com.google.gson.Gson
-import com.gymandroid.JsonHelper.JsonRead
+import android.net.Uri
 import com.gymandroid.R
-import kotlinx.serialization.json.Json.Default.context
-import java.io.BufferedReader
+import com.gymandroid.ui.exercise.excerciseDetailFragment
+import kotlinx.serialization.UnstableDefault
 import java.io.File
-import java.io.IOException
 import java.io.InputStream
 import java.nio.file.Paths
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
+
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -21,6 +17,7 @@ import java.util.HashMap
  *
  * TODO: Replace all uses of this class before publishing your app.
  */
+@OptIn(UnstableDefault::class)
 object DummyContent {
 
     /**
@@ -49,20 +46,20 @@ object DummyContent {
 
     init {
 
-        val path = Paths.get("").toAbsolutePath().toString()
-        println("Working Directory = $path")
-
         // Add some sample items.
         for (i in 1..COUNT) {
             addItem(createDummyItem(i, moves[i - 1].toString()))
         }
-        val inputStream: InputStream = File("tree_json.json").inputStream()
-
-        val inputString = inputStream.bufferedReader().use { it.readText() }
-        println(inputString)
-
+        println(File("../*"))
+        val text = File(
+            Uri.parse(
+                "android.resource://" + "com.gymandroid" + "/" + R.raw.tree_json
+            ).path
+        ).bufferedReader().readLines()
+        println(text)
     }
-//    fun getJsonDataFromAsset(fileName: String): String? {
+
+    //    fun getJsonDataFromAsset(fileName: String): String? {
 //        val jsonString: String
 //        try {
 //
