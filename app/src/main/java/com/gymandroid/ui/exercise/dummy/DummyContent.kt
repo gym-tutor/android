@@ -1,6 +1,17 @@
 package com.gymandroid.ui.exercise.dummy
 
+import android.content.Context
+import android.content.res.Resources
+import android.util.Log
+import com.google.gson.Gson
+import com.gymandroid.JsonHelper.JsonRead
 import com.gymandroid.R
+import kotlinx.serialization.json.Json.Default.context
+import java.io.BufferedReader
+import java.io.File
+import java.io.IOException
+import java.io.InputStream
+import java.nio.file.Paths
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -37,13 +48,57 @@ object DummyContent {
     private val COUNT = 2
 
     init {
+
+        val path = Paths.get("").toAbsolutePath().toString()
+        println("Working Directory = $path")
+
         // Add some sample items.
         for (i in 1..COUNT) {
             addItem(createDummyItem(i, moves[i - 1].toString()))
         }
+        val inputStream: InputStream = File("tree_json.json").inputStream()
+
+        val inputString = inputStream.bufferedReader().use { it.readText() }
+        println(inputString)
 
     }
-
+//    fun getJsonDataFromAsset(fileName: String): String? {
+//        val jsonString: String
+//        try {
+//
+//            jsonString = File(fileName).bufferedReader().use { it.readText() }
+//        } catch (ioException: IOException) {
+//            ioException.printStackTrace()
+//            return null
+//        }
+//
+//        return jsonString
+//    }
+//
+//
+//    fun getJsonDataFromAsset(resources: Resources, fileName: String): String? {
+//        val jsonString: String
+//        try {
+//
+//            jsonString = resources.openRawResource(fileName).bufferedReader().use { it.readText() }
+//        } catch (ioException: IOException) {
+//            ioException.printStackTrace()
+//            return null
+//        }
+//
+//        return jsonString
+//    }
+//
+//    fun getJsonDataFromAsset(context: Context, fileName: String): String? {
+//        val jsonString: String
+//        try {
+//            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
+//        } catch (ioException: IOException) {
+//            ioException.printStackTrace()
+//            return null
+//        }
+//        return jsonString
+//    }
     private fun addItem(item: DummyItem) {
         ITEMS.add(item)
         ITEM_MAP.put(item.id, item)
@@ -56,7 +111,7 @@ object DummyContent {
             makeDetails(position),
             uries[position - 1],
             cautions[position - 1],
-            imgs[position - 1]
+            2131755014
         )
     }
 
