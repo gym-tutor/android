@@ -2,6 +2,7 @@ package com.gymandroid.ui.exercise
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.JsonReader
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,7 @@ import com.gymandroid.ui.exercise.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_excercise_list.*
 import kotlinx.android.synthetic.main.excercise_list_content.view.*
 import kotlinx.android.synthetic.main.excercise_list.*
+import java.io.InputStream
 
 /**
  * An activity representing a list of Pings. This activity
@@ -42,6 +44,12 @@ class excerciseListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val `is`: InputStream = resources.openRawResource(R.raw.tree_json)
+        DummyContent.read(`is`.bufferedReader())
+        DummyContent.build()
+
+
         setContentView(R.layout.activity_excercise_list)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

@@ -1,15 +1,10 @@
 package com.gymandroid
 
-import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
@@ -19,14 +14,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gymandroid.ui.exercise.ExercisingActivity
-import com.gymandroid.ui.exercise.dummy.DummyContent
-import com.gymandroid.ui.exercise.excerciseDetailFragment
-import com.gymandroid.ui.exercise.gyroscope
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_exercise.*
 import kotlinx.serialization.json.Json.Default.context
-import java.io.File
+import java.io.InputStream
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
+
 
 class MainActivity : AppCompatActivity() {
 
