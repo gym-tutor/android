@@ -1,20 +1,26 @@
 package com.gymandroid
 
+import android.content.ClipData
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.drawable.toDrawable
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gymandroid.ui.exercise.ExercisingActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.serialization.json.Json.Default.context
 import java.io.InputStream
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
@@ -47,6 +53,21 @@ class MainActivity : AppCompatActivity() {
                         R.anim.enter_new_from_right,
                         R.anim.enter_old_from_right
                     )
+                    true
+                }
+                R.id.theme_change->{
+                    val menu: Menu = app_bar.menu;
+                    val themcontroller: MenuItem = menu.findItem(R.id.theme_change)
+                    if (themcontroller.isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        themcontroller.setIcon(R.drawable.night_icon);
+                        themcontroller.setChecked(false);
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        themcontroller.setChecked(true);
+                        themcontroller.setIcon(R.drawable.day_icon);
+
+                    }
                     true
                 }
                 else -> false
