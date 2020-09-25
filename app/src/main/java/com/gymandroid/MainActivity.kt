@@ -1,6 +1,5 @@
 package com.gymandroid
 
-import android.content.ClipData
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
@@ -11,18 +10,13 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.graphics.drawable.toDrawable
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gymandroid.ui.exercise.ExercisingActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_setting.*
-import kotlinx.serialization.json.Json.Default.context
-import java.io.InputStream
 import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
 
 

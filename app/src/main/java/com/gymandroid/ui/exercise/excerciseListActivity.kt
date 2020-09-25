@@ -2,22 +2,18 @@ package com.gymandroid.ui.exercise
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.JsonReader
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.cardview.widget.CardView
 import com.gymandroid.MainActivity
 import com.gymandroid.R
 
 import com.gymandroid.ui.exercise.dummy.DummyContent
-import kotlinx.android.synthetic.main.activity_excercise_list.*
 import kotlinx.android.synthetic.main.excercise_list_content.view.*
 import kotlinx.android.synthetic.main.excercise_list.*
 import java.io.InputStream
@@ -45,10 +41,9 @@ class excerciseListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val `is`: InputStream = resources.openRawResource(R.raw.tree_json)
+        val `is`: InputStream = resources.openRawResource(R.raw.pose_info)
         DummyContent.read(`is`.bufferedReader())
         DummyContent.build()
-
 
         setContentView(R.layout.activity_excercise_list)
 
