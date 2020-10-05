@@ -16,10 +16,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gymandroid.Settings.SettingsActivity
-import com.gymandroid.ui.exercise.ExercisingActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -92,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 //        addRecords(this, ExerciseRecord(1092418400, "TEST", 0.1f, 1.1f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
 //        updateOrAddRecord(this, ExerciseRecord(1192418400, "TEST", 98.6f, 1.1f, "LOLs. [More analysis...]"))
     }
-    
+
 
 
 //    override fun onResume() {
