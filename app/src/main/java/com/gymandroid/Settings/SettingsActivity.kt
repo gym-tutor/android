@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.gymandroid.R
 import kotlinx.android.synthetic.main.activity_setting.settings_bar
 
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -28,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
             )
         }
 
-        val colortheme: Switch = findViewById(R.id.change_theme) as Switch
+        val colortheme: Switch = findViewById<Switch>(R.id.change_theme)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             colortheme.isChecked = true;
         }
