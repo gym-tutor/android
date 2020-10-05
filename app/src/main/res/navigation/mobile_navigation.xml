@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_exercise"
-        android:name="com.gymandroid.ui.exercise.ExerciseFragment"
+        android:name="com.gymandroid.ui.exercise.ExerciseSelectionFragment"
         android:label="@string/title_exercise"
         tools:layout="@layout/fragment_exercise" />
 </navigation>

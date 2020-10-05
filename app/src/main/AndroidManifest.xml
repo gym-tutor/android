@@ -15,7 +15,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.exercise.gyroscope"></activity>
+        <activity android:name=".ui.exercise.ExerciseGyroFragment"></activity>
         <activity android:name=".BackEnd" />
         <activity
             android:name=".ui.exercise.excerciseListActivity"
@@ -23,7 +23,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.exercise.ExercisingActivity" />
         <activity
-            android:name=".ui.exercise.excerciseDetailActivity"
+            android:name=".ui.exercise.ExcerciseActivity"
             android:label="@string/title_excercise_detail"
             android:parentActivityName=".ui.exercise.excerciseListActivity"
             android:theme="@style/AppTheme.NoActionBar">

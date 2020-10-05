@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.exercise.ExerciseFragment">
+    android:layout_height="match_parent">
 
 
     <TextureView
-        android:id="@+id/camera"
+        android:id="@+id/camera_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="20dp"
@@ -26,10 +25,10 @@
         android:indeterminate="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/camera" />
+        app:layout_constraintTop_toBottomOf="@id/camera_preview" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/note_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/note_pos"
@@ -38,14 +37,14 @@
         app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/result_notification_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pos"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView4" />
+        app:layout_constraintTop_toBottomOf="@id/note_text" />
 
     <Button
         android:id="@+id/start_exercising_btn"
@@ -55,6 +54,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView5" />
+        app:layout_constraintTop_toBottomOf="@id/result_notification_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
