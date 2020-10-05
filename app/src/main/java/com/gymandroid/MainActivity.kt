@@ -15,9 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.gymandroid.ui.exercise.ExercisingActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import com.gymandroid.ui.exercise.excerciseListActivity as excerciseListActivity1
 
 
 class MainActivity : AppCompatActivity() {
@@ -92,16 +90,7 @@ class MainActivity : AppCompatActivity() {
 //        updateOrAddRecord(this, ExerciseRecord(1192418400, "TEST", 98.6f, 1.1f, "LOLs. [More analysis...]"))
     }
 
-    fun startExercise(view: View) {
-        makeText(this@MainActivity, "Starting Exercise !", LENGTH_SHORT).show()
-        startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
-//        startActivity(Intent(this@MainActivity, BackEnd::class.java))
-    }
 
-    fun startExercisingPage(view: View) {
-        makeText(this@MainActivity, "Exercising Page !", LENGTH_SHORT).show()
-        startActivity(Intent(this@MainActivity, ExercisingActivity::class.java))
-    }
 
 
 //    override fun onResume() {

@@ -3,7 +3,9 @@ package com.gymandroid.ui.exercise
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
@@ -11,29 +13,34 @@ import android.widget.MediaController
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.gymandroid.R
 
 
-class ExercisingActivity : AppCompatActivity() {
+class ExercisePrepareFragment : Fragment() {
     private var countdownNumber = 6;
     private lateinit var videoView: VideoView
     private lateinit var infoView: TextView
     private var isPlaying: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_exercising)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_exercise_prepare, container, false)
 
-        videoView = findViewById(R.id.exercising_video)
-        infoView = findViewById(R.id.exercising_info)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        videoView = view.findViewById(R.id.exercising_video)
+        infoView = view.findViewById(R.id.exercising_info)
 
         videoView.setVideoURI(
             // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tree)
+            Uri.parse("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.tree)
         )
 
         // hide controls
-        val ctrl = MediaController(this)
+        val ctrl = MediaController(requireContext())
         ctrl.visibility = View.GONE
         ctrl.setMediaPlayer(videoView)
         videoView.setMediaController(ctrl)

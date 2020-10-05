@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/exercise_pages_navigation"
+    app:startDestination="@id/excerciseDetailFragment"
+    >
+
+    <fragment
+        android:id="@+id/excerciseDetailFragment"
+        android:name="com.gymandroid.ui.exercise.ExcerciseDetailFragment"
+        android:label="ExcerciseDetailFragment" >
+        <action
+            android:id="@+id/action_excerciseDetailFragment_to_exerciseGyroFragment"
+            app:destination="@id/exerciseGyroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseGyroFragment"
+        android:name="com.gymandroid.ui.exercise.ExerciseGyroFragment"
+        android:label="ExerciseGyroFragment" >
+        <action
+            android:id="@+id/action_exerciseGyroFragment_to_exercisePrepareFragment"
+            app:destination="@id/exercisePrepareFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exercisePrepareFragment"
+        android:name="com.gymandroid.ui.exercise.ExercisePrepareFragment"
+        android:label="ExerciseGyroFragment" />
+</navigation>

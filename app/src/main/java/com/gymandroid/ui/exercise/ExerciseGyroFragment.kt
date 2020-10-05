@@ -17,21 +17,23 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
 import android.util.Size
-import android.view.Surface
-import android.view.TextureView
-import android.view.View
+import android.view.*
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.gymandroid.Helper
 import com.gymandroid.R
 import com.gymandroid.YogaActivity
-import kotlinx.android.synthetic.main.activity_gyroscope.*
 import java.io.File
 import java.util.*
 import kotlin.math.absoluteValue
 
-class gyroscope : AppCompatActivity() {
-
+class ExerciseGyroFragment : Fragment() {
     var sensorManager: SensorManager? = null
     var sensor: Sensor? = null
     lateinit var helper: Helper
@@ -51,70 +53,51 @@ class gyroscope : AppCompatActivity() {
     private val mBackgroundHandler: Handler? = null
     private val mBackgroundThread: HandlerThread? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_gyroscope)
-
-        // gyroscope parts start
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        Log.w(TAG,"onCreate")
+        sensorManager = requireActivity()
+            .getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
-//        helper = Helper.getInstance(this)
-//        if (!helper.camera.allPermissionsGranted()){
-//            ActivityCompat.requestPermissions(this,helper.camera.getPermissions(),
-//                helper.camera.getPermissionsCode())
-//            Log.e("Main","Cammera not granted")
-//
-//        }
-
-        // gyroscope parts end
-
-        // camera preview
-        textureView = findViewById<View>(R.id.camera) as TextureView
-        assert(textureView != null)
-        textureView!!.surfaceTextureListener = textureListener
-
-        // camera preview
-        start_exercising_btn.setOnClickListener {
-            val intent = Intent(this, YogaActivity::class.java)
-            startActivity(intent)
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        sensorManager!!.registerListener(gyroListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sensorManager!!.unregisterListener(gyroListener)
     }
 
     private var gyroListener: SensorEventListener = object : SensorEventListener {
-        override fun onAccuracyChanged(sensor: Sensor, acc: Int) {}
+        override fun onAccuracyChanged(sensor: Sensor, acc: Int) = Unit
+
 
         override fun onSensorChanged(event: SensorEvent) {
             val x = event.values[0]
             val y = event.values[1]
             val z = event.values[2]
 
+            val result_notification_text = view?.findViewById<TextView>(R.id.result_notification_text)
+            val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar)
+
             if (-85 < y.toInt() && y.toInt() < -45) {
-                textView5?.text = "Position Good !"
-                progressBar.setProgress(100, true)
+                result_notification_text?.text = "Position Good !"
+                progressBar?.setProgress(100, true)
 //                start_exercising_btn.isClickable = true
             } else {
-                textView5?.text = "Position: needs adjust !"
+                result_notification_text?.text = "Position: needs adjust !"
                 if (y.toInt() < -85) {
-                    progressBar.setProgress(((y.toInt() + 245).absoluteValue / 1.6).toInt(), true)
+                    progressBar?.setProgress(((y.toInt() + 245).absoluteValue / 1.6).toInt(), true)
                 } else {
-                    progressBar.setProgress(((y.toInt() - 115).absoluteValue / 1.6).toInt(), true)
+                    progressBar?.setProgress(((y.toInt() - 115).absoluteValue / 1.6).toInt(), true)
                 }
 
 //                start_exercising_btn.isClickable = false
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_exercise_gyro, container, false)
+        return rootView
+
     }
 
     var textureListener: TextureView.SurfaceTextureListener = object :
@@ -141,6 +124,35 @@ class gyroscope : AppCompatActivity() {
         }
 
         override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        textureView = view.findViewById<TextureView>(R.id.camera_preview)
+
+        textureView!!.surfaceTextureListener = textureListener
+
+        view.findViewById<Button>(R.id.start_exercising_btn)
+            .setOnClickListener {
+            Navigation.findNavController(requireActivity(),R.id.exercise_nav_host_fragment).navigate(
+                R.id.action_exerciseGyroFragment_to_exercisePrepareFragment
+            )
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.w(TAG,"onResume")
+
+        sensorManager!!.registerListener(gyroListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.w(TAG,"onStop")
+        sensorManager!!.unregisterListener(gyroListener)
     }
     private val stateCallback: CameraDevice.StateCallback = object : CameraDevice.StateCallback() {
         override fun onOpened(camera: CameraDevice) {
@@ -183,7 +195,7 @@ class gyroscope : AppCompatActivity() {
 
                     override fun onConfigureFailed(cameraCaptureSession: CameraCaptureSession) {
                         Toast.makeText(
-                            this@gyroscope,
+                            requireContext(),
                             "Configuration change",
                             Toast.LENGTH_SHORT
                         ).show()
@@ -198,7 +210,7 @@ class gyroscope : AppCompatActivity() {
 
     private fun openCamera() {
         val manager =
-            getSystemService(Context.CAMERA_SERVICE) as CameraManager
+            requireActivity().getSystemService(Context.CAMERA_SERVICE) as CameraManager
         Log.e(TAG, "is camera open")
 
         lateinit var cameraId: String
@@ -210,15 +222,15 @@ class gyroscope : AppCompatActivity() {
             imageDimension = map.getOutputSizes(SurfaceTexture::class.java)[0]
             // Add permission for camera and let user grant the permission
             if (ActivityCompat.checkSelfPermission(
-                    this,
+                    requireContext(),
                     Manifest.permission.CAMERA
                 ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
+                    requireContext(),
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 ActivityCompat.requestPermissions(
-                    this@gyroscope,
+                    requireActivity(),
                     arrayOf(
                         Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -252,21 +264,6 @@ class gyroscope : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        if (grantResults.isNotEmpty() && grantResults[0] ==
-//            PackageManager.PERMISSION_GRANTED) {
-//            Toast.makeText(this, "Permission Accepted", Toast.LENGTH_SHORT).show()
-//        }
-//        else {
-//            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-//        }
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//    }
 
 
 }
