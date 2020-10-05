@@ -32,16 +32,11 @@ class excerciseDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excercise_detail)
-//        Log.d("videohahaha", intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID))
-//        Log.d("videohahaha", R.raw.tree.toString())
-//        Log.d("videohahaha", ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].content)
-
 
         videoView2 = findViewById(R.id.videoView)
 
         videoView2.setVideoURI(
             // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-//            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
             Uri.parse(
                 "android.resource://" + getPackageName() + "/" + ITEMS[intent.getStringExtra(
                     excerciseDetailFragment.ARG_ITEM_ID
@@ -81,7 +76,6 @@ class excerciseDetailActivity : AppCompatActivity() {
 
         videoView2.setVideoURI(
             // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-//            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
             Uri.parse(
                 "android.resource://" + getPackageName() + "/" + ITEMS[intent.getStringExtra(
                     excerciseDetailFragment.ARG_ITEM_ID
