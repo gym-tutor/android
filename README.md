@@ -1,5 +1,9 @@
 # Miss Yoga
 
+## Plan & TODO list
+
+https://docs.google.com/document/d/1anAaulWye5MBk_TK_04cz6dEKdnr4hmb0W6esnxE3Vk/edit#heading=h.p95pm65lr5d9
+
 ## Credits
 
 **Icon**
