@@ -92,17 +92,7 @@ class MainActivity : AppCompatActivity() {
 //        addRecords(this, ExerciseRecord(1092418400, "TEST", 0.1f, 1.1f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
 //        updateOrAddRecord(this, ExerciseRecord(1192418400, "TEST", 98.6f, 1.1f, "LOLs. [More analysis...]"))
     }
-
-    fun startExercise(view: View) {
-        makeText(this@MainActivity, "Starting Exercise !", LENGTH_SHORT).show()
-        startActivity(Intent(this@MainActivity, excerciseListActivity1::class.java))
-//        startActivity(Intent(this@MainActivity, BackEnd::class.java))
-    }
-
-    fun startExercisingPage(view: View) {
-        makeText(this@MainActivity, "Exercising Page !", LENGTH_SHORT).show()
-        startActivity(Intent(this@MainActivity, ExercisingActivity::class.java))
-    }
+    
 
 
 //    override fun onResume() {
