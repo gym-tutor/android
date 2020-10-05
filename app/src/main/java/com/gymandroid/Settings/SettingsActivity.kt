@@ -1,15 +1,12 @@
-package com.gymandroid
+package com.gymandroid.Settings
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_setting.*
+import com.gymandroid.R
 import kotlinx.android.synthetic.main.activity_setting.settings_bar
-import kotlinx.android.synthetic.main.activity_setting_account.*
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -25,7 +22,10 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setting)
         settings_bar.setOnClickListener {
             finish()
-            overridePendingTransition(R.anim.exit_old_from_right, R.anim.exit_new_from_right)
+            overridePendingTransition(
+                R.anim.exit_old_from_right,
+                R.anim.exit_new_from_right
+            )
         }
 
         val colortheme: Switch = findViewById(R.id.change_theme) as Switch

@@ -1,11 +1,10 @@
-package com.gymandroid
+package com.gymandroid.Settings
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.android.synthetic.main.activity_setting.*
+import com.gymandroid.R
 import kotlinx.android.synthetic.main.activity_setting_account.*
 
 class SettingsAccount : AppCompatActivity() {

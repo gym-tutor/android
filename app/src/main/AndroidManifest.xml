@@ -43,8 +43,8 @@
 
         <activity android:name=".YogaActivity" />
         <activity android:name=".SummaryDetailsActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".SettingsAccount" />
+        <activity android:name=".Settings.SettingsActivity" />
+        <activity android:name=".Settings.SettingsAccount" />
     </application>
 
 </manifest>
