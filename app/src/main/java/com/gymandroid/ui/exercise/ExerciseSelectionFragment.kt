@@ -1,33 +1,50 @@
 package com.gymandroid.ui.exercise
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.storage.FileDownloadTask
+import com.google.firebase.storage.FirebaseStorage
 import com.gymandroid.R
-import com.gymandroid.ui.exercise.dummy.DummyContent
+import com.gymandroid.ui.exercise.dummy.YogaPoseRepository
+import com.gymandroid.utils.GlideApp
 import kotlinx.android.synthetic.main.excercise_list.*
 import kotlinx.android.synthetic.main.excercise_list_content.view.*
+import java.io.File
 import java.io.InputStream
 
 
 class ExerciseSelectionFragment : Fragment() {
-
+    private val TAG = "ExerciseSelectionFragment"
     private lateinit var viewmodel: ExerciseViewModel
     private var twoPane: Boolean = false
+    private var yogaPoseRepository =  YogaPoseRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val `is`: InputStream = resources.openRawResource(R.raw.pose_info)
-        DummyContent.read(`is`.bufferedReader())
-        DummyContent.build()
+        val yogaIS: InputStream = requireActivity()
+                                    .assets
+                                    .open("pose_info.json")
+
+        yogaPoseRepository.loadJson(yogaIS)
     }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,12 +65,13 @@ class ExerciseSelectionFragment : Fragment() {
             twoPane = true
         }
         excercise_list.adapter = SimpleItemRecyclerViewAdapter(
-                requireActivity(), DummyContent.ITEMS, twoPane)
+                requireActivity(), this, yogaPoseRepository.getAllYogaPoseInfoList(), twoPane)
     }
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: FragmentActivity,
-        private val values: List<DummyContent.DummyItem>,
+        private val fragment: ExerciseSelectionFragment,
+        private val values: List<YogaPoseRepository.YogaPoseInfo>,
         private val twoPane: Boolean
     ) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>()
     {
@@ -64,12 +82,14 @@ class ExerciseSelectionFragment : Fragment() {
             val imgView: ImageView = view.findViewById(R.id.image)
         }
 
+        private val storage = FirebaseStorage.getInstance().getReference()
+
         private val onClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyContent.DummyItem
+            val poseInfo = v.tag as YogaPoseRepository.YogaPoseInfo
             if (twoPane) {
                 val fragment = ExcerciseDetailFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ExcerciseDetailFragment.ARG_ITEM_ID, item.id)
+                        putString(ExcerciseDetailFragment.ARG_ITEM_ID, poseInfo.name)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -77,12 +97,95 @@ class ExerciseSelectionFragment : Fragment() {
                     .replace(R.id.excercise_detail_container, fragment)
                     .commit()
             } else {
-                val intent = Intent(v.context, ExcerciseActivity::class.java).apply {
-                    putExtra(ExcerciseDetailFragment.ARG_ITEM_ID, item.id)
-                }
-                v.context.startActivity(intent)
+
+                val progressbar = v.findViewById<ProgressBar>(R.id.download_progressbar)
+                progressbar.isVisible = true
+                val warning = v.findViewById<ImageView>(R.id.warning_icon)
+                storage.child(poseInfo.name).listAll()
+                    .addOnSuccessListener{
+                        val items = it.items
+                        val prefixes = it.prefixes
+                        var counts = 0
+                        items.forEachIndexed{idx, item->
+
+                            val localFile = File(parentActivity.filesDir, item.path)
+                            val parentDir = File(parentActivity.filesDir,poseInfo.name)
+
+                            if (!(parentDir.exists() && parentDir.isDirectory)){
+                                parentDir.mkdir()
+                            }
+                            if (! localFile.exists()){
+                                localFile.createNewFile()
+                                item.getFile(localFile).addOnSuccessListener {
+
+                                    counts +=1
+                                    progressbar.progress = counts/items.size * 100
+                                    Log.w("onSuccess",counts.toString() + " downloaded")
+                                    if (counts == items.size){
+                                        goToExerciseActivity(v.context,poseInfo)
+                                    }
+                                    // Local temp file has been created
+
+                                }.addOnFailureListener {
+                                    // Handle any errors
+                                    warning.isVisible = true
+                                    progressbar.isVisible = false
+                                    Log.w("onFailure", it.toString())
+                                }
+                            }
+                            else{
+                                counts +=1
+                                if (counts == items.size){
+                                    goToExerciseActivity(v.context,poseInfo)
+                                }
+                            }
+
+                        }
+
+                        prefixes.forEach {prefix->
+                            Log.w("storage.child", "prefix " + prefix.path)
+                        }
+                    }.addOnFailureListener{
+                        warning.isVisible = true
+                        progressbar.isVisible = false
+                        Log.e("storage.child",it.toString())
+                    }
+
+
+
+//                val localFile: File = File(item.yogaStepVideoNames)
+//                riversRef.getFile(localFile)
+//                    .addOnSuccessListener(OnSuccessListener<FileDownloadTask.TaskSnapshot?> {
+//                        // Successfully downloaded data to local file
+//                        // ...
+//                    }).addOnFailureListener(OnFailureListener {
+//                        // Handle failed download
+//                        // ...
+//                    })
+
+//
             }
         }
+
+        private fun goToExerciseActivity(context: Context,poseInfo:YogaPoseRepository.YogaPoseInfo){
+
+            val intent = Intent(context, ExcerciseActivity::class.java).apply {
+                putExtra(ExcerciseDetailFragment.ARG_ITEM_ID, poseInfo.name)
+                putExtra("name", poseInfo.name)
+                putExtra("content", poseInfo.content)
+                putExtra("detail", poseInfo.detail)
+                putExtra("descVideoFileName", poseInfo.descVideoFileName)
+                putExtra("caution",poseInfo.caution)
+                putExtra("descImgFileName", poseInfo.descImgFileName)
+                putExtra("yogaStepVideoNames",
+                    poseInfo.yogaStepVideoNames)
+            }
+            context.startActivity(intent)
+        }
+
+
+
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
@@ -94,9 +197,19 @@ class ExerciseSelectionFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-//            holder.idView.text = item.id
+            Log.w("onBindviewHolder",position.toString() + item.descImgFileName)
+//            holder.idView.text = item.name
             holder.contentView.text = item.content
-            holder.imgView.setImageResource(item.img)
+
+//            val imageInputStream = parentActivity.assets
+//                .open(item.name +'/' + item.descImgFileName)
+
+
+            val gsReference = storage.child(item.descImgFileName)
+            GlideApp.with(fragment)
+                .load(gsReference)
+                .fitCenter()
+                .into(holder.imgView);
 
             with(holder.itemView) {
                 tag = item
@@ -107,3 +220,4 @@ class ExerciseSelectionFragment : Fragment() {
 
     }
 }
+

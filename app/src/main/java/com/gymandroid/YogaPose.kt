@@ -11,6 +11,7 @@ class YogaPose(yogaName: String, helper: Helper) : CoroutineScope {
     var helper = helper
     var yogaName = yogaName
     var start_step: Step = StartStep(yogaName, 0, helper)
+
     var curr_step: Step by observable(start_step) { _, oldValue, newValue ->
         onStateChange?.invoke(newValue)
     }

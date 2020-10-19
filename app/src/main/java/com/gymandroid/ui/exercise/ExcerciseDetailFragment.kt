@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.VideoView
+import androidx.core.net.toUri
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.gymandroid.R
-import com.gymandroid.ui.exercise.dummy.DummyContent
-import kotlinx.android.synthetic.main.fragment_excercise_detail.*
+import com.gymandroid.ui.exercise.dummy.YogaPoseRepository
+import java.io.File
 
 /**
  * A fragment representing a single excercise detail screen.
@@ -26,27 +28,15 @@ class ExcerciseDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-    private var item: DummyContent.DummyItem? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
-                // Load the dummy content specified by the fragment
-                // arguments. In a real-world scenario, use a Loader
-                // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-//                activity?.toolbar_layout?.title = item?.content
-            }
-        }
-
-        //        Log.d("videohahaha", intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID))
-//        Log.d("videohahaha", R.raw.tree.toString())
-//        Log.d("videohahaha", ITEMS[intent.getStringExtra(excerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].content)
+    private lateinit var mViewModel: ExerciseViewModel;
+    private lateinit var poseInfo: YogaPoseRepository.YogaPoseInfo;
 
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mViewModel = ViewModelProviders.of(requireActivity()).get(ExerciseViewModel::class.java)
 
+        mViewModel.setYogaPoseInfo(poseInfo)
 
     }
 
@@ -54,54 +44,61 @@ class ExcerciseDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val poseInfo = YogaPoseRepository.YogaPoseInfo(
+            requireActivity().intent.getStringExtra("name"),
+            requireActivity().intent.getStringExtra("content"),
+            requireActivity().intent.getStringExtra("detail"),
+            requireActivity().intent.getStringExtra("descVideoFileName"),
+            requireActivity().intent.getStringExtra("caution"),
+            requireActivity().intent.getStringExtra("descImgFileName"),
+            requireActivity().intent.getStringArrayListExtra("yogaStepVideoNames")
+
+        )
+        this.poseInfo = poseInfo
+
         val rootView = inflater.inflate(R.layout.fragment_excercise_detail, container, false)
 
         val videoView = rootView.findViewById<VideoView>(R.id.videoView)
-        val intent =requireActivity().intent
+        Log.w("hello", poseInfo.descVideoFileName)
+        val video_path = File(
+            requireActivity().filesDir,poseInfo.descVideoFileName)
+        Log.w("hello", video_path.absolutePath)
+
+
+
         videoView.setVideoURI(
-            // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-//            Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cobra_2)
-            Uri.parse(
-                "android.resource://" + requireActivity().getPackageName() + "/"
-                        + DummyContent.ITEMS[intent.getStringExtra(
-                    ExcerciseDetailFragment.ARG_ITEM_ID
-                ).toInt() - 1].uri
-            )
+            video_path.toUri()
+
         )
         videoView.start()
-
-        val pose_id = requireActivity().intent.getStringExtra(ExcerciseDetailFragment.ARG_ITEM_ID).toInt() - 1
 
 
         val yoga_caution_text = rootView.findViewById<TextView>(R.id.yoga_caution_text)
         val yoga_detail_text = rootView.findViewById<TextView>(R.id.yoga_detail_text)
         val yoga_content_text = rootView.findViewById<TextView>(R.id.yoga_content_text)
 
-        yoga_content_text.text =
-            DummyContent.ITEMS[intent.getStringExtra(ExcerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].content
-        yoga_detail_text?.text =
-            DummyContent.ITEMS[intent.getStringExtra(ExcerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].details
-        yoga_caution_text?.text =
-            DummyContent.ITEMS[intent.getStringExtra(ExcerciseDetailFragment.ARG_ITEM_ID).toInt() - 1].caution
-//
-//
-        Log.w("onCreateView",yoga_detail_text.text.toString() )
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            val fragment = ExcerciseDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(
-                        ExcerciseDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(ExcerciseDetailFragment.ARG_ITEM_ID)
-                    )
-                }
-            }
+        yoga_caution_text.text = poseInfo.caution
+        yoga_detail_text.text = poseInfo.detail
+        yoga_content_text.text = poseInfo.content
 
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .add(R.id.excercise_detail_container, fragment)
-//                .commit()
-        }
+        Log.w("onCreateView",yoga_detail_text.text.toString() )
+//        if (savedInstanceState == null) {
+//            // Create the detail fragment and add it to the activity
+//            // using a fragment transaction.
+//            val fragment = ExcerciseDetailFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString(
+//                        ExcerciseDetailFragment.ARG_ITEM_ID,
+//                        intent.getStringExtra(ExcerciseDetailFragment.ARG_ITEM_ID)
+//                    )
+//                }
+//            }
+//
+////            requireActivity().supportFragmentManager.beginTransaction()
+////                .add(R.id.excercise_detail_container, fragment)
+////                .commit()
+//        }
 
 
 

@@ -24,5 +24,13 @@
     <fragment
         android:id="@+id/exercisePrepareFragment"
         android:name="com.gymandroid.ui.exercise.ExercisePrepareFragment"
-        android:label="ExerciseGyroFragment" />
+        android:label="ExerciseGyroFragment" >
+        <action
+            android:id="@+id/action_exercisePrepareFragment_to_yogaExercisingFragment"
+            app:destination="@id/yogaExercisingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/yogaExercisingFragment"
+        android:name="com.gymandroid.ui.exercise.YogaExercisingFragment"
+        android:label="YogaExercisingFragment" />
 </navigation>

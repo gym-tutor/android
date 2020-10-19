@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.gymandroid.R
 
 
@@ -31,23 +32,16 @@ class ExercisePrepareFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        videoView = view.findViewById(R.id.exercising_video)
         infoView = view.findViewById(R.id.exercising_info)
-
-        videoView.setVideoURI(
-            // https://www.shutterstock.com/video/clip-16847116-fitness-yoga-animation
-            Uri.parse("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.tree)
-        )
-
         // hide controls
-        val ctrl = MediaController(requireContext())
-        ctrl.visibility = View.GONE
-        ctrl.setMediaPlayer(videoView)
-        videoView.setMediaController(ctrl)
-        ctrl.hide()
-
-        // hide video and show later
-        videoView.alpha = 0f
+//        val ctrl = MediaController(requireContext())
+//        ctrl.visibility = View.GONE
+//        ctrl.setMediaPlayer(videoView)
+//        videoView.setMediaController(ctrl)
+//        ctrl.hide()
+//
+//        // hide video and show later
+//        videoView.alpha = 0f
 
         // start count down
         blink()
@@ -59,14 +53,20 @@ class ExercisePrepareFragment : Fragment() {
             Handler().postDelayed({
                 val animation: Animation = AlphaAnimation(0f, 1f)
                 animation.duration = 300
-                videoView.startAnimation(animation)
-                videoView.alpha = 1f
-                videoView.start()
+//                videoView.startAnimation(animation)
+//                videoView.alpha = 1f
+//                videoView.start()
             }, 0)
         }
         --countdownNumber
-        if (countdownNumber < 0) {
+        if (countdownNumber == -1) {
             infoView.text = "Exercising"
+
+            Navigation.findNavController(
+                requireActivity(),
+                R.id.exercise_nav_host_fragment
+            ).navigate(R.id.action_exercisePrepareFragment_to_yogaExercisingFragment)
+
         } else if (countdownNumber == 0) {
             infoView.text = "Ready..."
         } else {

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:accessibilityHeading="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,5 +33,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:visibility="invisible"
+            android:id="@+id/warning_icon"
+            android:src = "@drawable/ic_warning"
+            app:layout_constraintBottom_toBottomOf="@+id/image"
+            app:layout_constraintLeft_toLeftOf="@+id/image"
+            app:layout_constraintRight_toRightOf="@+id/image"
+            app:layout_constraintTop_toTopOf="@+id/image"
+            />
+
+        <ProgressBar
+            android:id="@+id/download_progressbar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:max="100"
+            android:progress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/image"
+            app:layout_constraintLeft_toLeftOf="@+id/image"
+            app:layout_constraintRight_toRightOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,16 +1,18 @@
 [
     {
-        "name": "Tree",
+        "name": "tree",
         "detail": "Tree Pose stretches the thighs, groins, torso, and shoulders. It builds strength in the ankles and calves, and tones the abdominal muscles. The pose also helps to remedy flat feet and is therapeutic for sciatica.",
-        "video_uri": 2131755016,
+        "video_uri": "tree/tree.mp4",
         "caution": "Due to the balancing nature of the posture, do not practice Tree Pose if you are currently experiencing headaches, insomnia, low blood pressure, or if you are lightheaded and/or dizzy. Those with high blood pressure should not raise their arms overhead in the pose. Always work within your own range of limits and abilities. If you have any medical concerns, talk with your doctor before practicing yoga.",
-        "img_uri": 2131755015
+        "img_uri": "tree/square_tree.jpg",
+        "video_segments":["/tree/tree_1.mp4","tree/tree_2.mp4","tree/tree_3.mp4","tree/tree_4.mp4"]
     },
     {
-        "name": "Cobra",
+        "name": "cobra",
         "detail": "Cobra Pose is best known for its ability to increase the flexibility of the spine. It stretches the chest while strengthening the spine and shoulders. It also helps to open the lungs, which is therapeutic for asthma. This pose also stimulates the abdominal organs, improving digestion.",
-        "video_uri": 2131755009,
+        "video_uri": "cobra/cobra.mp4",
         "caution": "Please do not practice Cobra if you have carpal tunnel syndrome, or a recent back or wrist injury. Women who are pregnant should avoid practicing this pose while on the floor, although they may practice it standing with their palms against a wall. Always work within your own range of limits and abilities. If you have any medical concerns, talk with your doctor before practicing yoga.",
-        "img_uri": 2131755014
+        "img_uri": "cobra/square_cobra.jpg",
+        "video_segments":["cobra/cobra_1.mp4","cobra/cobra_2.mp4","cobra/cobra_3.mp4","cobra/cobra_4.mp4"]
     }
 ]

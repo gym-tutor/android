@@ -2,7 +2,6 @@ package com.gymandroid.ui.exercise
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.SurfaceTexture
 import android.hardware.Sensor
@@ -11,7 +10,6 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.hardware.camera2.*
 import android.media.ImageReader
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
@@ -23,12 +21,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.gymandroid.Helper
 import com.gymandroid.R
-import com.gymandroid.YogaActivity
 import java.io.File
 import java.util.*
 import kotlin.math.absoluteValue

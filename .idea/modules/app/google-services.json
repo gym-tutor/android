@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1016451146793",
+    "firebase_url": "https://miss-yoga.firebaseio.com",
+    "project_id": "miss-yoga",
+    "storage_bucket": "miss-yoga.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016451146793:android:8a12ae36c2eed4721e6838",
+        "android_client_info": {
+          "package_name": "com.gymandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016451146793-hdlmbksa0ise1co56d90n5ccn1un5hpd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymandroid",
+            "certificate_hash": "aba4e4b254323c1d1c4e87031ba3b946acf4b76e"
+          }
+        },
+        {
+          "client_id": "1016451146793-sacj24suquh3c0rq64ldgq0jeoa56m3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXzmFHFRGUm88TV2nc6SyDoz0kE4R0w2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016451146793-sacj24suquh3c0rq64ldgq0jeoa56m3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

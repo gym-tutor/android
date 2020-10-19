@@ -3,11 +3,16 @@ package com.gymandroid.ui.exercise
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.gymandroid.ui.exercise.dummy.YogaPoseRepository
 
 class ExerciseViewModel : ViewModel() {
+    private var yogaPoseInfo = MutableLiveData<YogaPoseRepository.YogaPoseInfo>()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "Exercise"
+    fun setYogaPoseInfo(item:YogaPoseRepository.YogaPoseInfo){
+        yogaPoseInfo.value = item;
     }
-    val text: LiveData<String> = _text
+
+    fun getYogaPoseInfo():MutableLiveData<YogaPoseRepository.YogaPoseInfo>{
+        return yogaPoseInfo
+    }
 }
