@@ -19,5 +19,6 @@ class EvaluationStep(pose: String, id: Int, helper: Helper) :
                 this.setNextStep(PoseStep(pose, this.curr_id + 1, helper))
             }
         }
+        finished = true
     }
 }

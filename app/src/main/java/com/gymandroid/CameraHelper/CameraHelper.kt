@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.hardware.camera2.CameraCaptureSession
 import android.util.Base64
 import android.util.Log
 import android.util.Size
@@ -15,6 +16,8 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 typealias LumaListener = (luma: Double) -> Unit
@@ -24,16 +27,17 @@ class CameraHelper(context: Context) {
     private var imageCapture: ImageCapture? = null
     private var camera: Camera? = null
     private var currentImageTook: String? = null
-
+    /** Blocking camera operations are performed using this executor */
+    private lateinit var cameraExecutor: ExecutorService
 
     fun startCamera(lifecycleOwner: LifecycleOwner) {
         val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
             ProcessCameraProvider.getInstance(context)
 
-        Log.d("CameraHelper", "start camera before add listener")
-        Log.e("CameraHelper", cameraProviderFuture.toString())
+        cameraExecutor = Executors.newSingleThreadExecutor()
+
         cameraProviderFuture.addListener(Runnable {
-            Log.e("CameraHelper inside", cameraProviderFuture.toString())
+            Log.w("CameraHelper inside", cameraProviderFuture.toString())
 
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -42,14 +46,15 @@ class CameraHelper(context: Context) {
 
             //ImageCapture
 
-            imageCapture = ImageCapture.Builder().setTargetResolution(Size(468, 640)).build()
+            imageCapture = ImageCapture.Builder().setTargetResolution(Size(
+                468, 640)).build()
 
-            // Select back camera
+            // Select front camera
             val cameraSelector =
                 CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build()
 
             try {
-                Log.e("Try", "Use ")
+                Log.w("Try", "Use ")
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
 
@@ -74,7 +79,7 @@ class CameraHelper(context: Context) {
         // Setup image capture listener which is triggered after photo has
         // been taken
         imageCapture.takePicture(
-            ContextCompat.getMainExecutor(context), object :
+            cameraExecutor, object :
                 ImageCapture.OnImageCapturedCallback() {
 
                 override fun onCaptureSuccess(image: ImageProxy) {
@@ -111,6 +116,7 @@ class CameraHelper(context: Context) {
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
+
     fun getImage(): String? {
 
         return currentImageTook
@@ -132,9 +138,13 @@ class CameraHelper(context: Context) {
 
     companion object {
         private const val TAG = "CameraXBasic"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 
+    fun closeCamera() {
+
+        // Shut down our background executor
+        cameraExecutor.shutdown()
+    }
 }

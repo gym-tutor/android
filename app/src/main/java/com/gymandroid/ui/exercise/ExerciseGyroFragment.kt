@@ -131,6 +131,8 @@ class ExerciseGyroFragment : Fragment() {
 
         view.findViewById<Button>(R.id.start_exercising_btn)
             .setOnClickListener {
+                cameraCaptureSessions?.close()
+                cameraDevice?.close()
             Navigation.findNavController(requireActivity(),R.id.exercise_nav_host_fragment).navigate(
                 R.id.action_exerciseGyroFragment_to_exercisePrepareFragment
             )
@@ -259,6 +261,13 @@ class ExerciseGyroFragment : Fragment() {
         } catch (e: CameraAccessException) {
             e.printStackTrace()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraCaptureSessions?.close()
+        cameraDevice?.close()
+        cameraDevice = null
     }
 
 

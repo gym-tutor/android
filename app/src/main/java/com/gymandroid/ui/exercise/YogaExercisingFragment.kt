@@ -28,6 +28,7 @@ import kotlin.collections.ArrayList
 class YogaExercisingFragment : Fragment() {
     var job: Job? = null
     lateinit var helper: Helper
+    private val TAG = "YogaExercisingFragment"
     lateinit var yogaPose: YogaPose
     private lateinit var mViewModel: ExerciseViewModel;
     private lateinit var poseInfo: YogaPoseRepository.YogaPoseInfo
@@ -43,11 +44,15 @@ class YogaExercisingFragment : Fragment() {
             }
         }
         mViewModel.getYogaPoseInfo().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            Log.w("in Observer","here")
             poseInfo = it
             videolist = getVideoList()
             yogaPose = YogaPose(poseInfo.name, helper)
-//            startExerecse()
+            videoView.setVideoURI(videolist[0])
+            videoView.setOnPreparedListener {
+                videoView.seekTo( 1 );
+            }
+
+            startExerecse()
 
         })
 
@@ -104,4 +109,8 @@ class YogaExercisingFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        helper.camera.closeCamera()
+    }
 }

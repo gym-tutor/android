@@ -8,6 +8,7 @@ class RelaxStep(pose: String, id: Int, helper: Helper) : Step(pose, id, helper) 
 
         delay(1000)
         this.speak("It's finished. Relax your body")
+        finished = true
     }
 
     override fun isRelaxStep(): Boolean {

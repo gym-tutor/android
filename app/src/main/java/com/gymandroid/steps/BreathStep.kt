@@ -1,34 +1,25 @@
 package com.gymandroid.steps
 
 import android.util.Log
-import com.gymandroid.Helper
+import com.example.yogacomponentdemo.ServerHelper.ServerHelper
 import com.google.gson.JsonObject
+import com.gymandroid.Helper
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.util.*
+import kotlin.properties.Delegates
+import kotlin.properties.Delegates.observable
 
 class BreathStep(pose: String, id: Int, helper: Helper) : Step(pose, id, helper) {
+    private lateinit var breathLaunch: Job;
+
+
     var breath_times = 0
         set(value) {
             field = value
         }
-
-    private fun sendInfoToBackend(img: String): JSONObject {
-
-        val jsonObj = JsonObject()
-        jsonObj.addProperty("pose", pose)
-        jsonObj.addProperty("id", curr_id)
-        jsonObj.addProperty("command", "detect")
-        jsonObj.addProperty("image", img)
-        Log.w("In sendInfoToBackend", "prepare json " + jsonObj.toString())
-        helper.server.getEvaluateMessage(jsonObj)
-        while (helper.server.result == null) continue
-        Log.w("In sendInfoToBackend", helper.server.result.toString())
-        val result = JSONObject(helper.server.result.toString())
-        helper.server.result = null
-        return result
-
-    }
 
     private suspend fun breath() {
 
@@ -42,22 +33,45 @@ class BreathStep(pose: String, id: Int, helper: Helper) : Step(pose, id, helper)
 
         delay(2000)
 
-        var result: JSONObject? = null
         this.speak("breath " + breath_times.toString() + " times")
-        var a = launch { breath() }
+
+        breathLaunch = launch { breath() }
+
         Log.e("In Photo Step", "thread 2 ")
-        result = sendInfoToBackend(takePhoto()!!)
-        Log.e("In Photo Step", "thread 2 image send success ")
-        if (result?.get("pass") != true) {
-            a.cancel()
-            helper.speaker.mTTS.setSpeechRate(1f)
-            this.speak(result?.get("message") as String)
-            this.speak("Please try again")
-            this.repeat = true
-        } else {
-            a.join()
-            this.speak(result?.get("message") as String)
-        }
+        val img = takePhoto()!!
+
+        val jsonObj = JsonObject()
+        jsonObj.addProperty("pose", pose)
+        jsonObj.addProperty("id", curr_id)
+        jsonObj.addProperty("command", "detect")
+        jsonObj.addProperty("image", img)
+        Log.w("In sendInfoToBackend", "prepare json " + jsonObj.toString())
+        helper.server.getEvaluateMessage(jsonObj,object: ServerHelper.ReceiveMessageCallback{
+            override fun onReceive(result: JSONObject) {
+                Log.e("In Photo Step", "thread 2 image send success ")
+                if (result?.get("pass") != true) {
+                    breathLaunch.cancel()
+                    helper.speaker.mTTS.setSpeechRate(1f)
+                    this@BreathStep.speak(result?.get("message") as String)
+                    this@BreathStep.speak("Please try again")
+                    this@BreathStep.repeat = true
+                    finished = true
+                } else {
+                    suspend {
+                        breathLaunch.join()
+                        this@BreathStep.speak(result?.get("message") as String )
+                        finished = true
+                    }
+                }
+            }
+
+            override fun onFailure() {
+                breathLaunch.cancel()
+                this@BreathStep.speak("Network fail")
+            }
+
+        })
+
 
 
         //this.speak("finish")

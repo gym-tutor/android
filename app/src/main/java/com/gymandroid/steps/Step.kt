@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlin.coroutines.CoroutineContext
+import kotlin.properties.Delegates.observable
 
 abstract class Step(pose: String, id: Int, helper: Helper) : CoroutineScope {
     protected var pose = pose
@@ -16,6 +17,14 @@ abstract class Step(pose: String, id: Int, helper: Helper) : CoroutineScope {
 
     protected var helper = helper
     protected var max_step = 0
+
+    var finished:Boolean by observable(false){
+            _, oldValue, newValue ->
+        if(oldValue == false && newValue == true)
+            onFinished?.invoke()
+    }
+
+    var onFinished: (() -> Unit)? = null
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob() + Dispatchers.Main
@@ -60,6 +69,7 @@ abstract class Step(pose: String, id: Int, helper: Helper) : CoroutineScope {
     fun setNextStep(step: Step) {
         this.next_step = step
     }
+
 
     abstract suspend fun action();
 

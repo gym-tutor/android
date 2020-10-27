@@ -1,8 +1,10 @@
 package com.example.yogacomponentdemo.ServerHelper
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
+import kotlinx.serialization.json.Json
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -12,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 class ServerHelper {
-    var result: JSONObject? = null
 
     interface APIService {
         @GET("/users/{user}")
@@ -27,6 +28,11 @@ class ServerHelper {
         fun GetStepMessages(@Body body: JsonObject): Call<ResponseBody>
     }
 
+    interface ReceiveMessageCallback{
+        fun onReceive(result:JSONObject)
+        fun onFailure()
+    }
+
     companion object {
         private val retrofit = Retrofit.Builder()
             .baseUrl(Config.address)
@@ -36,8 +42,10 @@ class ServerHelper {
         var service = retrofit.create(APIService::class.java)
     }
 
-    fun getEvaluateMessage(jsonObj: JsonObject) {
-        var msg: String? = ""
+
+
+    fun getEvaluateMessage(jsonObj: JsonObject,callback:ReceiveMessageCallback) {
+        Log.w("ServerHelper","getEvaluateMessage" )
         service.getVectors(jsonObj).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("service post", t.message)
@@ -47,20 +55,26 @@ class ServerHelper {
                 call: Call<ResponseBody>,
                 response: retrofit2.Response<ResponseBody>
             ) {
-                msg = response.body()?.string()
-                result = JSONObject(msg)
-                Log.e(
-                    "In getEvaluateMessage",
-                    "---TTTT :: POST msg from server :: " + result.toString()
-                )
+
+
+                val msg = response.body()?.string()
+                msg?.apply {
+
+                    val result = JSONObject(this)
+                    Log.e(
+                        "In getEvaluateMessage",
+                        "---TTTT :: POST msg from server :: " + result.toString()
+                    )
+
+                    callback.onReceive(result);
+                }
+
             }
 
         })
-        Log.e("in Post", msg)
     }
 
-    fun getStepMessages(jsonObj: JsonObject) {
-        var msg: String? = ""
+    fun getStepMessages(jsonObj: JsonObject,callback:ReceiveMessageCallback) {
         service.GetStepMessages(jsonObj).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("service post", t.message)
@@ -70,12 +84,18 @@ class ServerHelper {
                 call: Call<ResponseBody>,
                 response: retrofit2.Response<ResponseBody>
             ) {
-                msg = response.body()?.string()
-                result = JSONObject(msg)
-                Log.e(
-                    "In getStepMessages",
-                    "---TTTT :: POST msg from server :: " + result.toString()
-                )
+                Log.w("ServerHelper", response.toString())
+                val msg = response.body()?.string()
+
+                msg?.apply {
+
+                    val result = JSONObject(this)
+                    Log.e(
+                        "In getEvaluateMessage",
+                        "---TTTT :: POST msg from server :: " + result.toString()
+                    )
+                    callback.onReceive(result);
+                }
             }
 
         })

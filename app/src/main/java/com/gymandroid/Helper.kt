@@ -8,19 +8,29 @@ import com.example.yogacomponentdemo.CameraHelper.CameraHelper
 
 class Helper(val context: Context) {
     var camera = CameraHelper(context)
-    val speaker = SpeakerHelper(context)
-    val server = ServerHelper()
+        private set
+    var speaker = SpeakerHelper(context)
+        private set
+
+    var server = ServerHelper()
+        private set
 
     fun start(lifecycleOwner: LifecycleOwner) {
         camera.startCamera(lifecycleOwner)
     }
 
     companion object {
-        private var instance: Helper? = null
+        private var instance: Helper? = null;
         fun getInstance(context: Context): Helper {
-            if (instance == null) instance = Helper(context)
-            instance!!.camera = CameraHelper(context)
+            if (instance == null)
+                instance = Helper(context)
+
             return instance!!
+        }
+
+        fun createNew(context: Context):Helper{
+            instance = Helper(context)
+            return instance!!;
         }
     }
 

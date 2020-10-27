@@ -12,6 +12,7 @@ class PoseStep(pose: String, id: Int, helper: Helper) : Step(pose, id, helper) {
     override suspend fun action() {
         var message = this.instruction
         this.speak(message)
+        finished = true
     }
 
     override fun isPoseStep(): Boolean {

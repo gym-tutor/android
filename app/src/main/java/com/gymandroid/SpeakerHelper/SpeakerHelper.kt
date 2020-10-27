@@ -59,8 +59,4 @@ class SpeakerHelper(context: Context) {
         }
     }
 
-    fun checkPermission() {
-
-    }
-
 }
