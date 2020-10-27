@@ -66,8 +66,13 @@ class BreathStep(pose: String, id: Int, helper: Helper) : Step(pose, id, helper)
             }
 
             override fun onFailure() {
-                breathLaunch.cancel()
-                this@BreathStep.speak("Network fail")
+
+                suspend {
+                    breathLaunch.join()
+                }
+                this@BreathStep.speak("Network fail, go back to the end")
+                next_step = EndStep(pose,this@BreathStep.curr_id,helper)
+                finished = true
             }
 
         })

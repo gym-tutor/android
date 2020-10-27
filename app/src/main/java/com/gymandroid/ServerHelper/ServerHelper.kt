@@ -49,6 +49,7 @@ class ServerHelper {
         service.getVectors(jsonObj).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("service post", t.message)
+                callback.onFailure()
             }
 
             override fun onResponse(
@@ -56,7 +57,10 @@ class ServerHelper {
                 response: retrofit2.Response<ResponseBody>
             ) {
 
-
+                Log.w("getEvaluateMessage", response.toString());
+                if(response.code() != 200){
+                    callback.onFailure()
+                }
                 val msg = response.body()?.string()
                 msg?.apply {
 
@@ -78,6 +82,7 @@ class ServerHelper {
         service.GetStepMessages(jsonObj).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("service post", t.message)
+                callback.onFailure()
             }
 
             override fun onResponse(
@@ -108,6 +113,7 @@ class ServerHelper {
         service.greetUser("HI").enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("service get", t.message)
+
             }
 
             override fun onResponse(

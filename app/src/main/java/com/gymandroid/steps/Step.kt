@@ -11,6 +11,7 @@ import kotlin.properties.Delegates.observable
 abstract class Step(pose: String, id: Int, helper: Helper) : CoroutineScope {
     protected var pose = pose
     var curr_id = id
+        get
         protected set
     protected var next_step: Step? = null
     var repeat = false
