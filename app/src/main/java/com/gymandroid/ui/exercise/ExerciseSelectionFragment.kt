@@ -1,6 +1,5 @@
 package com.gymandroid.ui.exercise
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,15 +14,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import com.gymandroid.R
+import com.gymandroid.ui.exercise.dummy.Recommendations
 import com.gymandroid.ui.exercise.dummy.YogaPoseRepository
 import com.gymandroid.utils.GlideApp
 import kotlinx.android.synthetic.main.excercise_list.*
 import kotlinx.android.synthetic.main.excercise_list_content.view.*
+import kotlinx.android.synthetic.main.fragment_exercise.*
 import java.io.File
 import java.io.InputStream
 
@@ -33,6 +32,7 @@ class ExerciseSelectionFragment : Fragment() {
     private lateinit var viewmodel: ExerciseViewModel
     private var twoPane: Boolean = false
     private var yogaPoseRepository =  YogaPoseRepository()
+    private var userRecom = Recommendations()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +64,8 @@ class ExerciseSelectionFragment : Fragment() {
             // activity should be in two-pane mode.
             twoPane = true
         }
+        recom.visibility = View.INVISIBLE
+        recom.text = userRecom.toString()
         excercise_list.adapter = SimpleItemRecyclerViewAdapter(
                 requireActivity(), this, yogaPoseRepository.getAllYogaPoseInfoList(), twoPane)
     }
