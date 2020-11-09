@@ -18,6 +18,7 @@ import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import com.gymandroid.R
 import com.gymandroid.ui.exercise.dummy.Recommendations
+import com.gymandroid.ui.exercise.dummy.UserInfo
 import com.gymandroid.ui.exercise.dummy.YogaPoseRepository
 import com.gymandroid.utils.GlideApp
 import kotlinx.android.synthetic.main.excercise_list.*
@@ -33,6 +34,7 @@ class ExerciseSelectionFragment : Fragment() {
     private var twoPane: Boolean = false
     private var yogaPoseRepository =  YogaPoseRepository()
     private var userRecom = Recommendations()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +66,11 @@ class ExerciseSelectionFragment : Fragment() {
             // activity should be in two-pane mode.
             twoPane = true
         }
-        recom.visibility = View.INVISIBLE
-        recom.text = userRecom.toString()
+        if (UserInfo.get_height() == null) {
+            recom_card.visibility = View.INVISIBLE
+        } else {
+            recom.text = userRecom.toString()
+        }
         excercise_list.adapter = SimpleItemRecyclerViewAdapter(
                 requireActivity(), this, yogaPoseRepository.getAllYogaPoseInfoList(), twoPane)
     }

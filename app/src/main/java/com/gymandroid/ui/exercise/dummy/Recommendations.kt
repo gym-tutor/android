@@ -5,20 +5,31 @@ import android.util.Log
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.reflect.Array.newInstance
+import javax.xml.datatype.DatatypeFactory.newInstance
 
 class Recommendations {
 
-    private var height:Double=0.0
-    private var weight:Double=0.0
+    private var height:Double=UserInfo.get_height()
+    private var weight:Double=UserInfo.get_weight()
+
+//    private var height:Double=0.0
+//    private var weight:Double=0.0
+
+
+    fun set_height(h: Double) {
+        height = h
+    }
+
+    fun set_weight(w: Double) {
+        weight = w
+    }
+
 
     fun loadJson(inputStream: InputStream) {
 
         val reader = JsonReader(InputStreamReader(inputStream));
-        reader.beginArray()
-        while (reader.hasNext()){
-            readMessage(reader)
-        }
-        reader.endArray()
+        readMessage(reader)
         reader.close()
     }
 
@@ -41,7 +52,12 @@ class Recommendations {
     }
 
     override fun toString(): String {
-        return "Recommendations(height=$height, weight=$weight)"
+        val base:String = "Based on your personal health data\nThis Yoga Pose may be a better fit for you\n"
+        if (weight/height < 80/180) {
+            return base + "Cobra"
+        } else {
+            return base + "Tree"
+        }
     }
 
 

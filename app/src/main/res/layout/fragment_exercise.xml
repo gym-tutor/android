@@ -8,12 +8,23 @@
     android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/recom"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/recom_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        app:cardBackgroundColor="@android:color/tab_indicator_text">
+
+        <TextView
+            android:id="@+id/recom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    </androidx.cardview.widget.CardView>
 
     <FrameLayout
         android:id="@+id/frameLayout"
