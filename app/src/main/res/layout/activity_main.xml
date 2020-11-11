@@ -16,7 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/top_app_bar"
         app:title="Gym Tutor">
-
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.core.widget.NestedScrollView

@@ -27,15 +27,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            setTheme(R.style.DarkTheme)
         } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.AppTheme)
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
+
+        val menu: Menu = app_bar.menu;
+        val themcontroller: MenuItem = menu.findItem(R.id.theme_change)
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            themcontroller.setIcon(R.drawable.night_icon);
+            themcontroller.setChecked(false);
+        } else {
+            themcontroller.setIcon(R.drawable.day_icon);
+            themcontroller.setChecked(true);
+        }
         app_bar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.settings_appbar_button -> {
@@ -52,20 +62,15 @@ class MainActivity : AppCompatActivity() {
                     val themcontroller: MenuItem = menu.findItem(R.id.theme_change)
                     if (themcontroller.isChecked) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        themcontroller.setIcon(R.drawable.night_icon);
-                        themcontroller.setChecked(false);
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        themcontroller.setChecked(true);
-                        themcontroller.setIcon(R.drawable.day_icon);
-
                     }
+                    super.recreate()
                     true
                 }
                 else -> false
             }
         }
-
 //        // gyroscope parts start
 //        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 //        sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
@@ -89,7 +94,6 @@ class MainActivity : AppCompatActivity() {
 //        addRecords(this, ExerciseRecord(1092418400, "TEST", 0.1f, 1.1f, "Most sit-ups are correct. Arm positions need to be corrected as your arms are ... most times. [More analysis...]"))
 //        updateOrAddRecord(this, ExerciseRecord(1192418400, "TEST", 98.6f, 1.1f, "LOLs. [More analysis...]"))
     }
-
 
 
 //    override fun onResume() {

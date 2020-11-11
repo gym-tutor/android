@@ -11,7 +11,7 @@ import com.gymandroid.R
 import kotlinx.android.synthetic.main.activity_setting.settings_bar
 
 
-class SettingsActivity : FragmentActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
